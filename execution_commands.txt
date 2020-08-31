@@ -27,4 +27,10 @@ Compare a recording versus a live event!
 jack_lsp
 aconnect -l
 
+How to git
+git add
+git commit
+git push
 
+to update locl repo
+git pull https://github.com/phenixxmos/Carefully_Testing.git
