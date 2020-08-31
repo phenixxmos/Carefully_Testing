@@ -1,0 +1,30 @@
+this.executeFile("filepath")
+execute file path
+
+(var z;z=this.executeFile("/home/pi/Cherish/cherish_super_setup.scd");)
+(var z;z=this.executeFile("/home/pi/Cherish/playback_routine.scd");)
+
+(var noise_calibration;noise_calibration=(-5.6);~noi_cal=noise_calibration.dbamp;)
+~ncl=Synth(\playbuf_m,[\amp,1,\cal,~noi_cal,\out,~playout,\bufnum,~cal_samp.at(0).bufnum,\lp,1]);
+
+(var z;z=this.executeFile("/home/pi/Cherish_testing_0.0.0/cherish_super_setup_reciever_hail.scd");)
+
+(var z;z=this.executeFile("/home/pi/Cherish_testing_0.0.0/cherish_super_setup_reciever.scd");)
+(var z;z=this.executeFile("/home/pi/Cherish_testing_0.0.0/cherish_super_setup_sender.scd");)
+
+
+(var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_reciever.scd");)
+(var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_sender.scd");)
+
+(var noise_calibration;noise_calibration=(-9.2);~noi_cal=noise_calibration.dbamp;)
+
+
+~noi_cal=0.25;
+~speech_rec.play;
+
+Compare a recording versus a live event!
+
+jack_lsp
+aconnect -l
+
+

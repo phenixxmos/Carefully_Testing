@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+jackd -d alsa -d hw:x20 -r 48000 -p 1024 -n 2&
+sleep 2
+sclang
+#a2jmidid -e
+
+
+#5 dots
+
+#142cm distance between the devices
+
+#126cm high speaker
+#92.5cm Mic board

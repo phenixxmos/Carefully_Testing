@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+jackd -d alsa -d hw:V10 -r 16000 -p 512&
+sleep 10
+sclang
