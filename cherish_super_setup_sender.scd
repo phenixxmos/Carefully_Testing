@@ -1,3 +1,8 @@
+m=Server.default.options;
+m.numOutputBusChannels=10;
+m.numInputBusChannels=10;
+m.numBuffers=2000;
+
 s.doWhenBooted({
 var path,l,test_config,major,minor,patch,dev_id,firmware_id,room_c,level,room_condition,firmware,sender,receiver;
 
@@ -18,10 +23,7 @@ room_c=room_condition.at(\Closed);
 
 ~signal=TwoWayIdentityDictionary['1kHz Tone'->1,'Person_3_(male)_03_16kHz_chopped'->2,'Person_3_(male)_03_48kHz_chopped'->3];
 ~weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
-m=Server.local.options;
-m.numOutputBusChannels=10;
-m.numInputBusChannels=10;
-m.numBuffers=2000;
+
 ~sys=Array.fill(24, { arg i; 0 });
 ~sys.insert(0,240);
 ~sys.insert(25,247);

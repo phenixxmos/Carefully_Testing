@@ -28,9 +28,11 @@ jack_lsp
 aconnect -l
 
 How to git
+git status
 git add
 git commit
 git push
 
-to update locl repo
+
+to update local repo
 git pull https://github.com/phenixxmos/Carefully_Testing.git
