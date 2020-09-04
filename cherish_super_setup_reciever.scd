@@ -1,14 +1,27 @@
-//version 0.0.1
-s.doWhenBooted({
-var path,l,rec_path,sender,receiver;
+m=Server.local.options;
+m.numOutputBusChannels=8;
+m.numInputBusChannels=8;
+m.numBuffers=2000;
 
+s.doWhenBooted({
+var path,spath,l,rec_path,sender,receiver;
+
+
+path=PathName.new(File.getcwd++"/Playback_samples/");
 rec_path="/home/pi/Cherish_testing_0.0.0/Testing_recording/";
 ~gap_size=0.05;
 ~mic_input=0;
-sender="20:0";
-receiver="128:0";
 
 
+spath=SortedList.new(size: 8);
+~signal=TwoWayIdentityDictionary.new;
+path.entries.do({|path|
+	spath.add(path.absolutePath);
+});
+spath.do({|path,i|
+		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
+});
+~signal.put(\silence,0);
 ~rec_raw=Recorder(s);
 ~raw_bus=Bus.audio(s,8);
 ~rec_crpd=Recorder(s);
@@ -66,10 +79,7 @@ receiver="128:0";
 		{File.mkdir(~panorm++"raw/");"Normal/raw/ Created".postln;},
 		{"Normal/raw/ Directory already exist".postln;}
 	);
-m=Server.local.options;
-m.numOutputBusChannels=8;
-m.numInputBusChannels=8;
-m.numBuffers=2000;
+
 
 	/**
 	~mlis -the 8 channel mic listener
@@ -98,7 +108,6 @@ m.numBuffers=2000;
 			var l_sum,room_condition,firmware,signal,weight,l1sig1,l1sig2,l1signal,l2sig1,l2sig2,l2signal,l3sig1,l3sig2,l3signal,l4sig1,l4sig2,l4signal,angle;
 				room_condition=TwoWayIdentityDictionary[\Normal->0,\Closed->1,\Open->2];
 				firmware=TwoWayIdentityDictionary['APP-MIC-RECORDER_DDR426797A2936B'->0,'VocalSorcery_1.0.4'->1];
-				signal=TwoWayIdentityDictionary['1kHz Tone'->1,'Person_3_(male)_03_16kHz_chopped'->2,'Person_3_(male)_03_48kHz_chopped'->3];
 				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
 
 			~out.add(\Version->format("%.%.%",val[2],val[3],val[4]));
@@ -117,7 +126,7 @@ m.numBuffers=2000;
 				{"No Signal Location 1".postln; },    // true function
 				{
 					l_sum=(0.5*val[8]+35.5).asString++weight.getID(val[11]);
-					~out.add(\Playback->signal.getID(l1signal););
+					~out.add(\Playback->~signal.getID(l1signal););
 					~out.add(\Location->1);
 					~out.add(\Level->l_sum);
 					~out.add(\True_Position->Order[(pi/2),0.2293363]);
@@ -135,7 +144,7 @@ m.numBuffers=2000;
 				{ "No Signal Location 2".postln;},
 				{
 					l_sum=(0.5*val[12]+35.5).asString++weight.getID(val[15]);
-					~out.add(\Playback->signal.getID(l2signal););
+					~out.add(\Playback->~signal.getID(l2signal););
 					~out.add(\Location->2);
 					~out.add(\Level->l_sum);
 					~out.add(\True_Position->Order[pi,0.2293363]);
@@ -153,7 +162,7 @@ m.numBuffers=2000;
 				{ "No Signal Location 3".postln; },
 				{
 					l_sum=(0.5*val[16]+35.5).asString++weight.getID(val[19]);
-					~out.add(\Playback->signal.getID(l3signal););
+					~out.add(\Playback->~signal.getID(l3signal););
 					~out.add(\Location->3);
 					~out.add(\Level->l_sum);
 					~out.add(\True_Position->Order[((3*pi)/2),0.2293363]);
@@ -172,7 +181,7 @@ m.numBuffers=2000;
 				{ "No Signal Location 4".postln; },    // true function
 				{
 					l_sum=(0.5*val[20]+35.5).asString++weight.getID(val[23]);
-					~out.add(\Playback->signal.getID(l4signal););
+					~out.add(\Playback->~signal.getID(l4signal););
 					~out.add(\Location->4);
 					~out.add(\Level->l_sum);
 					~out.add(\True_Position->Order[0,0.2293363]);
@@ -225,7 +234,7 @@ m.numBuffers=2000;
 				l.getLine;
 				l.getLine;
 				s=l.getLine.split($ );
-					out=format("%,%,%,%,%,\n",Date.localtime.secStamp,s.at(4),s.at(10),~out[\True_Position].at(0),~out[\True_Position].at(1));
+					out=format("%,%,%,%,%,\n",thisThread.seconds,s.at(4),s.at(10),~out[\True_Position].at(0),~out[\True_Position].at(1));
 				~tau_write.write(out);
 				1.wait;
 			});
@@ -265,6 +274,8 @@ m.numBuffers=2000;
 		"this the reset".postln;
 	});
 
+	sender="20:0";
+	receiver="128:0";
 	l=Pipe.new(format("aconnect % %",sender,receiver),"r");
 	l.getLine;
 });
