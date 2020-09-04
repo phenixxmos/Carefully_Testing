@@ -8,10 +8,11 @@ var path,spath,l,rec_path,sender,receiver;
 
 
 path=PathName.new(File.getcwd++"/Playback_samples/");
-rec_path="/home/pi/Cherish_testing_0.0.0/Testing_recording/";
+//rec_path="/home/pi/Cherish_testing_0.0.0/Testing_recording/";
+rec_path="/Users/phenix/Documents/Cherish/V2_testing/";
 ~gap_size=0.05;
 ~mic_input=0;
-
+~mic_positon=Dictionary.with(*[\x->0,\y->0,\z->0]);
 
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;
@@ -30,7 +31,7 @@ spath.do({|path,i|
 ~rec_raw.recHeaderFormat="WAV";
 ~rec_crpd.recSampleFormat="int16";
 ~rec_crpd.recHeaderFormat="WAV";
-~out=Dictionary.new(n=8);
+~out=Dictionary.new(n=18);
 ~papn=rec_path++"Open/";
 ~paclsd=rec_path++"Closed/";
 ~panorm=rec_path++"Normal/";
@@ -79,7 +80,19 @@ spath.do({|path,i|
 		{File.mkdir(~panorm++"raw/");"Normal/raw/ Created".postln;},
 		{"Normal/raw/ Directory already exist".postln;}
 	);
+~upper={|x| x.rightShift(7).asInteger;}; //splits 14bit integer into upper 7
+~lower={|x| x.asBinaryDigits(numDigits:7).convertDigits(base:2).asInteger;}; //splits 14bit integer into lower 7
+~expand={|upper,lower| ((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2));}; //recombines up and low
 
+~upperq={|x| (x*(2**6)).round(1).asInteger.rightShift(7);};//splits 14bit integer Q format 10.4 into upper 7
+~lowerq={|x| (x*(2**6)).round(1).asInteger.asBinaryDigits(numDigits:7).convertDigits(base:2);};//splits 14bit integer Q format 10.4 into lower 7
+~expandq={|upper,lower| (((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2))/(2**6)).round(0.01);};//recombines q format
+~rad2degree={|x| switch(sign(x),1.0,{x*(180/pi);},(-1.0),{360+(x*(180/pi));},0.0,{0.0});}; //radian to degree converter
+~sphere_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y)),(speak.at(\z)-mic.at(\z))].squared.sum.sqrt;}; //computes Spherical radius
+~cylinder_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;};//computes Cylindrical radius
+~elevation={|speak,mic| (speak.at(\z)-mic.at(\z));}; //finds the elavtion relative to the microphone board
+	~elevation_θ={|speak,mic| ~rad2degree.value(atan2((speak.at(\z)-mic.at(\z)),([(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;)));}; //finds the elavtion angle
+	~azimuth_φ={|speak,mic| ~rad2degree.value(atan2((speak.at(\y)-mic.at(\y)),(speak.at(\x)-mic.at(\x))));};  //finds Azimuth angle
 
 	/**
 	~mlis -the 8 channel mic listener
@@ -101,11 +114,12 @@ spath.do({|path,i|
 
 	MIDIClient.init;
 
+
 	MIDIdef.sysex(\parse,{|val,src|
 		val.postln;
 	switch(val[1],
 		0,{
-			var l_sum,room_condition,firmware,signal,weight,l1sig1,l1sig2,l1signal,l2sig1,l2sig2,l2signal,l3sig1,l3sig2,l3signal,l4sig1,l4sig2,l4signal,angle;
+			var l_sum,room_condition,firmware,signal,weight;
 				room_condition=TwoWayIdentityDictionary[\Normal->0,\Closed->1,\Open->2];
 				firmware=TwoWayIdentityDictionary['APP-MIC-RECORDER_DDR426797A2936B'->0,'VocalSorcery_1.0.4'->1];
 				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
@@ -116,81 +130,30 @@ spath.do({|path,i|
 			~out.add(\Condition->room_condition.getID(val[7]););
 
 			//location 1
-			l1sig1=val[9].asBinaryDigits;
-			l1sig1.removeAt(0);
-			l1sig2=val[10].asBinaryDigits;
-			l1sig2.removeAt(0);
-			l1signal=l1sig2++l1sig1;
-			l1signal=l1signal.convertDigits(base:2);
-			if ( l1signal==0,                // Boolean expression (chooses one at random)
-				{"No Signal Location 1".postln; },    // true function
-				{
-					l_sum=(0.5*val[8]+35.5).asString++weight.getID(val[11]);
-					~out.add(\Playback->~signal.getID(l1signal););
-					~out.add(\Location->1);
-					~out.add(\Level->l_sum);
-					~out.add(\True_Position->Order[(pi/2),0.2293363]);
-				}
-				);
+				~out.add(\s1l->Dictionary.with(*[\x->~expandq.value(val[13],val[12]),\y->~expandq.value(val[11],val[10]),\z->~expandq.value(val[9],val[8])]););
+				~out.add(\s1p->Dictionary.with(*[\signal->~expand.value(val[15],val[14]),\level->~expandq.value(val[17],val[16]),\weight->weight.getID(val[18])]););
+				~out.add(\s1r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s1l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s1l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s1l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s1l),~mic_positon)]););
 
 			//location 2
-			l2sig1=val[13].asBinaryDigits;
-			l2sig1.removeAt(0);
-			l2sig2=val[14].asBinaryDigits;
-			l2sig2.removeAt(0);
-			l2signal=l2sig2++l2sig1;
-			l2signal=l2signal.convertDigits(base:2);
-			if ( l2signal==0,
-				{ "No Signal Location 2".postln;},
-				{
-					l_sum=(0.5*val[12]+35.5).asString++weight.getID(val[15]);
-					~out.add(\Playback->~signal.getID(l2signal););
-					~out.add(\Location->2);
-					~out.add(\Level->l_sum);
-					~out.add(\True_Position->Order[pi,0.2293363]);
-				}
-				);
+			    ~out.add(\s2l->Dictionary.with(*[\x->~expandq.value(val[24],val[23]),\y->~expandq.value(val[22],val[21]),\z->~expandq.value(val[20],val[19])]););
+				~out.add(\s2p->Dictionary.with(*[\signal->~expand.value(val[26],val[25]),\level->~expandq.value(val[28],val[27]),\weight->weight.getID(val[29])]););
+				~out.add(\s2r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s2l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s2l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s2l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s2l),~mic_positon)]););
 
 			//location 3
-			l3sig1=val[17].asBinaryDigits;
-			l3sig1.removeAt(0);
-			l3sig2=val[18].asBinaryDigits;
-			l3sig2.removeAt(0);
-			l3signal=l3sig2++l3sig1;
-			l3signal=l3signal.convertDigits(base:2);
-			if ( l3signal==0,
-				{ "No Signal Location 3".postln; },
-				{
-					l_sum=(0.5*val[16]+35.5).asString++weight.getID(val[19]);
-					~out.add(\Playback->~signal.getID(l3signal););
-					~out.add(\Location->3);
-					~out.add(\Level->l_sum);
-					~out.add(\True_Position->Order[((3*pi)/2),0.2293363]);
-				}
-				);
+			    ~out.add(\s3l->Dictionary.with(*[\x->~expandq.value(val[35],val[34]),\y->~expandq.value(val[33],val[32]),\z->~expandq.value(val[31],val[30])]););
+				~out.add(\s3p->Dictionary.with(*[\signal->~expand.value(val[37],val[36]),\level->~expandq.value(val[39],val[38]),\weight->weight.getID(val[40])]););
+				~out.add(\s3r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s3l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s3l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s3l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s3l),~mic_positon)]););
 
+				//location 4
+			    ~out.add(\s4l->Dictionary.with(*[\x->~expandq.value(val[46],val[45]),\y->~expandq.value(val[44],val[43]),\z->~expandq.value(val[42],val[41])]););
+				~out.add(\s4p->Dictionary.with(*[\signal->~expand.value(val[48],val[47]),\level->~expandq.value(val[50],val[49]),\weight->weight.getID(val[51])]););
+				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),~mic_positon)]););
 
-			//location 4
-			l4sig1=val[21].asBinaryDigits;
-			l4sig1.removeAt(0);
-			l4sig2=val[22].asBinaryDigits;
-			l4sig2.removeAt(0);
-			l4signal=l4sig2++l4sig1;
-			l4signal=l4signal.convertDigits(base:2);
-			if ( l4signal==0,                // Boolean expression (chooses one at random)
-				{ "No Signal Location 4".postln; },    // true function
-				{
-					l_sum=(0.5*val[20]+35.5).asString++weight.getID(val[23]);
-					~out.add(\Playback->~signal.getID(l4signal););
-					~out.add(\Location->4);
-					~out.add(\Level->l_sum);
-					~out.add(\True_Position->Order[0,0.2293363]);
-				}
-				);
 				~dev_num=~out[\ID];
 		}
 	);
-});
+	});
+
 
 	MIDIdef.start(\recorder,{|src|
 		var player;

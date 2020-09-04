@@ -16,10 +16,10 @@ major=1;
 minor=0;
 patch=0;
 dev_id=6;
-speak1=Dictionary.with(*[\x->0,\y->0,\z->0]); //inches
-speak2=Dictionary.with(*[\x->0,\y->0,\z->0]);
-speak3=Dictionary.with(*[\x->0,\y->0,\z->0]);
-speak4=Dictionary.with(*[\x->0,\y->0,\z->0]);
+speak1=Dictionary.with(*[\x->124,\y->100.25,\z->41.75]); //inches
+speak2=Dictionary.with(*[\x->76.875,\y->53.125,\z->41.75]);
+speak3=Dictionary.with(*[\x->29.75,\y->100.25,\z->41.75]);
+speak4=Dictionary.with(*[\x->76.875,\y->147.375,\z->41.75]);
 firmware_id=firmware.at('VocalSorcery_1.0.4');
 room_c=room_condition.at(\Closed);
 
@@ -183,15 +183,15 @@ SynthDef.new(\send_m,{|amp=1,cal,out=0,send,bufnum=7,lp=0|
 ~lower={|x| x.asBinaryDigits(numDigits:7).convertDigits(base:2).asInteger;}; //splits 14bit integer into lower 7
 ~expand={|upper,lower| ((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2));}; //recombines up and low
 
-~upperq={|x| (x*(2**4)).round(1).asInteger.rightShift(7);};//splits 14bit integer Q format 10.4 into upper 7
-~lowerq={|x| (x*(2**4)).round(1).asInteger.asBinaryDigits(numDigits:7).convertDigits(base:2);};//splits 14bit integer Q format 10.4 into lower 7
-~expandq={|upper,lower| (((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2))/(2**4)).round(0.1);};//recombines q format
+~upperq={|x| (x*(2**6)).round(1).asInteger.rightShift(7);};//splits 14bit integer Q format 10.4 into upper 7
+~lowerq={|x| (x*(2**6)).round(1).asInteger.asBinaryDigits(numDigits:7).convertDigits(base:2);};//splits 14bit integer Q format 10.4 into lower 7
+~expandq={|upper,lower| (((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2))/(2**6)).round(0.01);};//recombines q format
 ~rad2degree={|x| switch(sign(x),1.0,{x*(180/pi);},(-1.0),{360+(x*(180/pi));},0.0,{0.0});}; //radian to degree converter
 ~sphere_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y)),(speak.at(\z)-mic.at(\z))].squared.sum.sqrt;}; //computes Spherical radius
 ~cylinder_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;};//computes Cylindrical radius
 ~elevation={|speak,mic| (speak.at(\z)-mic.at(\z));}; //finds the elavtion relative to the microphone board
-~elevation_θ={|speak,mic| atan2((speak.at(\z)-mic.at(\z)),([(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;));}; //finds the elavtion angle
-~azimuth_φ={|speak,mic| atan2((speak.at(\y)-mic.at(\y)),(speak.at(\x)-mic.at(\x)));};  //finds Azimuth angle
+	~elevation_θ={|speak,mic| ~rad2degree.value(atan2((speak.at(\z)-mic.at(\z)),([(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;)));}; //finds the elavtion angle
+	~azimuth_φ={|speak,mic| ~rad2degree.value(atan2((speak.at(\y)-mic.at(\y)),(speak.at(\x)-mic.at(\x))));};  //finds Azimuth angle
 
 ~sys=Array.fill(53, { arg i; nil });
 ~sys.put(0,240);
@@ -217,19 +217,19 @@ SynthDef.new(\send_m,{|amp=1,cal,out=0,send,bufnum=7,lp=0|
 ~sys.put(23,~lowerq.value(speak2.at(\x)););
 ~sys.put(24,~upperq.value(speak2.at(\x)););
 
-~sys.put(30,~lowerq.value(speak2.at(\z)););
-~sys.put(31,~upperq.value(speak2.at(\z)););
-~sys.put(32,~lowerq.value(speak2.at(\y)););
-~sys.put(33,~upperq.value(speak2.at(\y)););
-~sys.put(34,~lowerq.value(speak2.at(\x)););
-~sys.put(35,~upperq.value(speak2.at(\x)););
+~sys.put(30,~lowerq.value(speak3.at(\z)););
+~sys.put(31,~upperq.value(speak3.at(\z)););
+~sys.put(32,~lowerq.value(speak3.at(\y)););
+~sys.put(33,~upperq.value(speak3.at(\y)););
+~sys.put(34,~lowerq.value(speak3.at(\x)););
+~sys.put(35,~upperq.value(speak3.at(\x)););
 
-~sys.put(41,~lowerq.value(speak2.at(\z)););
-~sys.put(42,~upperq.value(speak2.at(\z)););
-~sys.put(43,~lowerq.value(speak2.at(\y)););
-~sys.put(44,~upperq.value(speak2.at(\y)););
-~sys.put(45,~lowerq.value(speak2.at(\x)););
-~sys.put(46,~upperq.value(speak2.at(\x)););
+~sys.put(41,~lowerq.value(speak4.at(\z)););
+~sys.put(42,~upperq.value(speak4.at(\z)););
+~sys.put(43,~lowerq.value(speak4.at(\y)););
+~sys.put(44,~upperq.value(speak4.at(\y)););
+~sys.put(45,~lowerq.value(speak4.at(\x)););
+~sys.put(46,~upperq.value(speak4.at(\x)););
 
 
 	//connects midi output
@@ -243,7 +243,7 @@ s.boot;
 ~noi_cal=[1,1,1,1];
 
 
- ~directional_playback_all.play;
+~directional_playback_all.play;
 //
 //
 // ~playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
@@ -267,6 +267,54 @@ var noise_calibration;noise_calibration=(-9.2);
 ~ncl=Synth(\playbuf_m,[\amp,1,\cal,~noi_cal,\out,2,\bufnum,~cal_samp.at(0).bufnum,\lp,1]);
 
 **/
+
+~mic_positon=Dictionary.with(*[\x->76.875,\y->100.25,\z->30.75]);
+~out=Dictionary.new(n=18);
+
+MIDIIn.connectAll;
+
+ ~out.at(\s4r);
+
+(
+MIDIdef.sysex(\parse,{|val,src|
+		val.postln;
+	switch(val[1],
+		0,{
+			var l_sum,room_condition,firmware,signal,weight,l1sig1,l1sig2,l1signal,l2sig1,l2sig2,l2signal,l3sig1,l3sig2,l3signal,l4sig1,l4sig2,l4signal,angle;
+				room_condition=TwoWayIdentityDictionary[\Normal->0,\Closed->1,\Open->2];
+				firmware=TwoWayIdentityDictionary['APP-MIC-RECORDER_DDR426797A2936B'->0,'VocalSorcery_1.0.4'->1];
+				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
+
+			~out.add(\Version->format("%.%.%",val[2],val[3],val[4]));
+			~out.add(\ID->val[5]);
+			~out.add(\Firmware->firmware.getID(val[6]););
+			~out.add(\Condition->room_condition.getID(val[7]););
+
+			//location 1
+				~out.add(\s1l->Dictionary.with(*[\x->~expandq.value(val[13],val[12]),\y->~expandq.value(val[11],val[10]),\z->~expandq.value(val[9],val[8])]););
+				~out.add(\s1p->Dictionary.with(*[\signal->~expand.value(val[15],val[14]),\level->~expandq.value(val[17],val[16]),\weight->weight.getID(val[18])]););
+				~out.add(\s1r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s1l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s1l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s1l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s1l),~mic_positon)]););
+
+			//location 2
+			    ~out.add(\s2l->Dictionary.with(*[\x->~expandq.value(val[24],val[23]),\y->~expandq.value(val[22],val[21]),\z->~expandq.value(val[20],val[19])]););
+				~out.add(\s2p->Dictionary.with(*[\signal->~expand.value(val[26],val[25]),\level->~expandq.value(val[28],val[27]),\weight->weight.getID(val[29])]););
+				~out.add(\s2r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s2l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s2l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s2l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s2l),~mic_positon)]););
+
+			//location 3
+			    ~out.add(\s3l->Dictionary.with(*[\x->~expandq.value(val[35],val[34]),\y->~expandq.value(val[33],val[32]),\z->~expandq.value(val[31],val[30])]););
+				~out.add(\s3p->Dictionary.with(*[\signal->~expand.value(val[37],val[36]),\level->~expandq.value(val[39],val[38]),\weight->weight.getID(val[40])]););
+				~out.add(\s3r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s3l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s3l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s3l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s3l),~mic_positon)]););
+
+				//location 4
+			    ~out.add(\s4l->Dictionary.with(*[\x->~expandq.value(val[46],val[45]),\y->~expandq.value(val[44],val[43]),\z->~expandq.value(val[42],val[41])]););
+				~out.add(\s4p->Dictionary.with(*[\signal->~expand.value(val[48],val[47]),\level->~expandq.value(val[50],val[49]),\weight->weight.getID(val[51])]););
+				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),~mic_positon)]););
+
+				~dev_num=~out[\ID];
+		}
+	);
+});
+)
 
 
 
