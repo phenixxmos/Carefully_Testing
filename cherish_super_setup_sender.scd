@@ -243,7 +243,7 @@ s.boot;
 ~noi_cal=[1,1,1,1];
 
 
-~directional_playback_all.play;
+
 //
 //
 // ~playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
@@ -267,54 +267,3 @@ var noise_calibration;noise_calibration=(-9.2);
 ~ncl=Synth(\playbuf_m,[\amp,1,\cal,~noi_cal,\out,2,\bufnum,~cal_samp.at(0).bufnum,\lp,1]);
 
 **/
-
-~mic_positon=Dictionary.with(*[\x->76.875,\y->100.25,\z->30.75]);
-~out=Dictionary.new(n=18);
-
-MIDIIn.connectAll;
-
- ~out.at(\s4r);
-
-(
-MIDIdef.sysex(\parse,{|val,src|
-		val.postln;
-	switch(val[1],
-		0,{
-			var l_sum,room_condition,firmware,signal,weight,l1sig1,l1sig2,l1signal,l2sig1,l2sig2,l2signal,l3sig1,l3sig2,l3signal,l4sig1,l4sig2,l4signal,angle;
-				room_condition=TwoWayIdentityDictionary[\Normal->0,\Closed->1,\Open->2];
-				firmware=TwoWayIdentityDictionary['APP-MIC-RECORDER_DDR426797A2936B'->0,'VocalSorcery_1.0.4'->1];
-				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
-
-			~out.add(\Version->format("%.%.%",val[2],val[3],val[4]));
-			~out.add(\ID->val[5]);
-			~out.add(\Firmware->firmware.getID(val[6]););
-			~out.add(\Condition->room_condition.getID(val[7]););
-
-			//location 1
-				~out.add(\s1l->Dictionary.with(*[\x->~expandq.value(val[13],val[12]),\y->~expandq.value(val[11],val[10]),\z->~expandq.value(val[9],val[8])]););
-				~out.add(\s1p->Dictionary.with(*[\signal->~expand.value(val[15],val[14]),\level->~expandq.value(val[17],val[16]),\weight->weight.getID(val[18])]););
-				~out.add(\s1r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s1l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s1l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s1l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s1l),~mic_positon)]););
-
-			//location 2
-			    ~out.add(\s2l->Dictionary.with(*[\x->~expandq.value(val[24],val[23]),\y->~expandq.value(val[22],val[21]),\z->~expandq.value(val[20],val[19])]););
-				~out.add(\s2p->Dictionary.with(*[\signal->~expand.value(val[26],val[25]),\level->~expandq.value(val[28],val[27]),\weight->weight.getID(val[29])]););
-				~out.add(\s2r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s2l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s2l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s2l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s2l),~mic_positon)]););
-
-			//location 3
-			    ~out.add(\s3l->Dictionary.with(*[\x->~expandq.value(val[35],val[34]),\y->~expandq.value(val[33],val[32]),\z->~expandq.value(val[31],val[30])]););
-				~out.add(\s3p->Dictionary.with(*[\signal->~expand.value(val[37],val[36]),\level->~expandq.value(val[39],val[38]),\weight->weight.getID(val[40])]););
-				~out.add(\s3r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s3l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s3l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s3l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s3l),~mic_positon)]););
-
-				//location 4
-			    ~out.add(\s4l->Dictionary.with(*[\x->~expandq.value(val[46],val[45]),\y->~expandq.value(val[44],val[43]),\z->~expandq.value(val[42],val[41])]););
-				~out.add(\s4p->Dictionary.with(*[\signal->~expand.value(val[48],val[47]),\level->~expandq.value(val[50],val[49]),\weight->weight.getID(val[51])]););
-				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),~mic_positon)]););
-
-				~dev_num=~out[\ID];
-		}
-	);
-});
-)
-
-
-
