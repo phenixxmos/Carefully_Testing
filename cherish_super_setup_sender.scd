@@ -1607,6 +1607,8 @@ g.latency=0;
 
 	});
 
+	~fin=Routine({1.wait;"The Recordings are done".postln;});
+
 ~weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
 SynthDef.new(\playbuf_m,{|amp=1,cal,out=0,bufnum=7,lp=0|
 	var sig;
@@ -1686,7 +1688,7 @@ s.boot;
 ~noi_cal=[1,1,1,1];
 
 
-~test_player=~bath_drain_1++~bath_drain_2++~bath_drain_3++~bath_drain_4++~bath_fill_1++~bath_fill_2++~bath_fill_3++~bath_fill_3++~microwave_1++~microwave_2++~microwave_3++~microwave_4++~door_slam_1++~door_slam_2++~door_slam_3++~door_slam_4++~voice_1++~voice_2++~voice_3++~voice_4++~noise_1++~noise_2++~noise_3++~noise_4;
+~test_player=~bath_drain_1++~bath_drain_2++~bath_drain_3++~bath_drain_4++~bath_fill_1++~bath_fill_2++~bath_fill_3++~bath_fill_3++~microwave_1++~microwave_2++~microwave_3++~microwave_4++~door_slam_1++~door_slam_2++~door_slam_3++~door_slam_4++~voice_1++~voice_2++~voice_3++~voice_4++~noise_1++~noise_2++~noise_3++~noise_4++~fin;
 
 
 //
