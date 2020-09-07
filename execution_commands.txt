@@ -18,7 +18,7 @@ execute file path
 
 (var noise_calibration;noise_calibration=(-9.2);~noi_cal=noise_calibration.dbamp;)
 
-
+/home/pi/Carefully_Testing/recordings_normal_orientation/
 ~noi_cal=0.25;
 ~speech_rec.play;
 

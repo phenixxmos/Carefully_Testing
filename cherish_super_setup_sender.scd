@@ -23,7 +23,7 @@ speak2=Dictionary.with(*[\x->111.5,\y->136.1,\z->41.75]);
 speak3=Dictionary.with(*[\x->128,\y->101.4,\z->41.75]);
 speak4=Dictionary.with(*[\x->114,\y->68.9,\z->41.75]);
 firmware_id=firmware.at('VocalSorcery_1.0.4');
-room_c=room_condition.at(\Closed);
+room_c=room_condition.at(\Open);
 
 ~gap_size=0.05;
 

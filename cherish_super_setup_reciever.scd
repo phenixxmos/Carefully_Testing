@@ -179,9 +179,9 @@ spath.do({|path,i|
 
 
 		player=Routine({
-			~rec_raw.prepareForRecord(format("%Raw_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.csv",~raw_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:8);
+			~rec_raw.prepareForRecord(format("%Raw_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.wav",~raw_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:8);
 
-			~rec_raw.prepareForRecord(format("%Three_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.csv",~crpd_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:3);
+			~rec_raw.prepareForRecord(format("%Three_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.wav",~crpd_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:3);
 
 		~mlis=Synth(\mic_listen_VS,[\out,~raw_bus,\in,~mic_input]);
 		~mcrpd=Synth(\mic_listen_crpd,[\out,~crpd_bus,\in,~mic_input]);
@@ -200,7 +200,7 @@ spath.do({|path,i|
 		out=format("%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,\n",thisThread.seconds,s.at(4),s.at(10),~out[\s1p]['signal num'],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s1r]['spherical Radius'],~out[\s1r][\elevation],~out[\s1r]['azimuth angle'],~out[\s1r]['elavation angle'],~out[\s2p]['signal num'],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s2r]['spherical Radius'],~out[\s2r][\elevation],~out[\s2r]['azimuth angle'],~out[\s2r]['elavation angle'],~out[\s3p]['signal num'],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s3r]['spherical Radius'],~out[\s3r][\elevation],~out[\s3r]['azimuth angle'],~out[\s3r]['elavation angle'],~out[\s4p]['signal num'],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\s4r]['spherical Radius'],~out[\s4r][\elevation],~out[\s4r]['azimuth angle'],~out[\s4r]['elavation angle'],~out[\Firmware],~out[\Version]);
 
 				~tau_write.write(out);
-				0.1.wait;
+				1.wait;
 			});
 		});
 			"Recording Started".postln;
