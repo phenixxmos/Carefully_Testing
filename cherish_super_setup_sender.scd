@@ -10,7 +10,9 @@ firmware=TwoWayIdentityDictionary['APP-MIC-RECORDER_DDR426797A2936B'->0,'VocalSo
 
 
 //path=PathName.new(File.getcwd++"/Playback_samples/");
-path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
+//path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
+path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
+
 test_config=0;
 major=1;
 minor=0;
@@ -139,6 +141,1447 @@ g.latency=0;
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
 
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~bath_fill_1=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~bath_fill_2=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~bath_fill_3=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~bath_fill_4=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~bath_drain_1=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~bath_drain_2=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~bath_drain_3=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~bath_drain_4=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+
+~microwave_1=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~microwave_2=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~microwave_3=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~microwave_4=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~door_slam_1=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~door_slam_2=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~door_slam_3=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~door_slam_4=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+
+~voice_1=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~voice_2=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~voice_3=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~voice_4=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~noise_1=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~noise_2=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~noise_3=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+
+	//Setting up playback
+	(5*~gap_size).wait;
+
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+
+	g.start;
+	(120+~gap_size).wait;
+	g.stop;
+
+	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
+	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
+	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
+	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
+
+	5.wait;
+
+	});
+
+~noise_4=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
+
+		synth=Array.fill(4, { arg i; nil });
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->94,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
 
 	//Setting up playback
 	(5*~gap_size).wait;
@@ -242,7 +1685,12 @@ SynthDef.new(\send_m,{|amp=1,cal,out=0,send,bufnum=7,lp=0|
 s.boot;
 ~noi_cal=[1,1,1,1];
 
+~signal.getID(6);
 
+~test_player=~bath_drain_1++~bath_drain_2++~bath_drain_3++~bath_drain_4++~bath_fill_1++~bath_fill_2++~bath_fill_3++~bath_fill_3++~microwave_1++~microwave_2++~microwave_3++~microwave_4++~door_slam_1++~door_slam_2++~door_slam_3++~door_slam_4++~voice_1++~voice_2++~voice_3++~voice_4++~noise_1++~noise_2++~noise_3++~noise_4;
+
+
+~door_slam_1.play;
 
 //
 //
