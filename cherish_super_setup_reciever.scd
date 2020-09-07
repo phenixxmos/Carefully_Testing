@@ -23,7 +23,6 @@ spath.do({|path,i|
 		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
 });
 ~signal.put(\silence,0);
-	~signal.getID
 ~rec_raw=Recorder(s);
 ~raw_bus=Bus.audio(s,8);
 ~rec_crpd=Recorder(s);
