@@ -9,9 +9,9 @@ room_condition=TwoWayIdentityDictionary[\Normal->0,\Closed->1,\Open->2];
 firmware=TwoWayIdentityDictionary['APP-MIC-RECORDER_DDR426797A2936B'->0,'VocalSorcery_1.0.4'->1];
 
 
-//path=PathName.new(File.getcwd++"/Playback_samples/");
+path=PathName.new(File.getcwd++"/Playback_samples/");
 //path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
-path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
+//path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 
 test_config=0;
 major=1;
@@ -1685,12 +1685,9 @@ SynthDef.new(\send_m,{|amp=1,cal,out=0,send,bufnum=7,lp=0|
 s.boot;
 ~noi_cal=[1,1,1,1];
 
-~signal.getID(6);
 
 ~test_player=~bath_drain_1++~bath_drain_2++~bath_drain_3++~bath_drain_4++~bath_fill_1++~bath_fill_2++~bath_fill_3++~bath_fill_3++~microwave_1++~microwave_2++~microwave_3++~microwave_4++~door_slam_1++~door_slam_2++~door_slam_3++~door_slam_4++~voice_1++~voice_2++~voice_3++~voice_4++~noise_1++~noise_2++~noise_3++~noise_4;
 
-
-~door_slam_1.play;
 
 //
 //
