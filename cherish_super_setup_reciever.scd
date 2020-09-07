@@ -181,7 +181,7 @@ spath.do({|path,i|
 		player=Routine({
 			~rec_raw.prepareForRecord(format("%Raw_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.wav",~raw_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:8);
 
-			~rec_raw.prepareForRecord(format("%Three_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.wav",~crpd_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:3);
+			~rec_crpd.prepareForRecord(format("%Three_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.wav",~crpd_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:3);
 
 		~mlis=Synth(\mic_listen_VS,[\out,~raw_bus,\in,~mic_input]);
 		~mcrpd=Synth(\mic_listen_crpd,[\out,~crpd_bus,\in,~mic_input]);
