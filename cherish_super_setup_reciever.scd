@@ -12,7 +12,7 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 rec_path="/Users/phenix/Documents/Cherish/V2_testing/";
 ~gap_size=0.05;
 ~mic_input=0;
-~mic_positon=Dictionary.with(*[\x->0,\y->0,\z->0]);
+~mic_positon=Dictionary.with(*[\x->79.2,\y->99.6,\z->31.2]);
 
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;

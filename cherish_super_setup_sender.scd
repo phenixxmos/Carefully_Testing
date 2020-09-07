@@ -16,10 +16,10 @@ major=1;
 minor=0;
 patch=0;
 dev_id=6;
-speak1=Dictionary.with(*[\x->124,\y->100.25,\z->41.75]); //inches
-speak2=Dictionary.with(*[\x->76.875,\y->53.125,\z->41.75]);
-speak3=Dictionary.with(*[\x->29.75,\y->100.25,\z->41.75]);
-speak4=Dictionary.with(*[\x->76.875,\y->147.375,\z->41.75]);
+speak1=Dictionary.with(*[\x->80.5,\y->148.2,\z->41.75]); //inches
+speak2=Dictionary.with(*[\x->111.5,\y->136.1,\z->41.75]);
+speak3=Dictionary.with(*[\x->128,\y->101.4,\z->41.75]);
+speak4=Dictionary.with(*[\x->114,\y->68.9,\z->41.75]);
 firmware_id=firmware.at('VocalSorcery_1.0.4');
 room_c=room_condition.at(\Closed);
 
