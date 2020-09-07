@@ -16,6 +16,9 @@ execute file path
 (var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_reciever.scd");)
 (var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_sender.scd");)
 
+~directional_playback_all.play;
+~noi_cal=[0.25,0.25,0.25,0.25];
+
 (var noise_calibration;noise_calibration=(-9.2);~noi_cal=noise_calibration.dbamp;)
 
 /home/pi/Carefully_Testing/recordings_normal_orientation/
