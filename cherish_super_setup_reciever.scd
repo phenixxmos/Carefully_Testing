@@ -8,7 +8,7 @@ var path,spath,l,rec_path,sender,receiver;
 
 
 path=PathName.new(File.getcwd++"/Playback_samples/");
-rec_path="/home/pi/Carefully_Testing/recordings_error_check/";
+rec_path="/home/pi/Carefully_Testing/white_test";
 //rec_path="/Users/phenix/Documents/Cherish/V2_testing/";
 ~gap_size=0.05;
 ~mic_input=0;
