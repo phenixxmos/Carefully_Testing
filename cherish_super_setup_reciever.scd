@@ -8,7 +8,7 @@ var path,spath,l,rec_path,sender,receiver;
 
 
 path=PathName.new(File.getcwd++"/Playback_samples/");
-rec_path="/home/pi/Carefully_Testing/recordings_normal_orientation/";
+rec_path="/home/pi/Carefully_Testing/recordings_flipped_upside_down_orientation/";
 //rec_path="/Users/phenix/Documents/Cherish/V2_testing/";
 ~gap_size=0.05;
 ~mic_input=0;
