@@ -76,14 +76,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
 	2.wait;
-
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -91,8 +87,6 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
 
@@ -100,9 +94,7 @@ g.latency=0;
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~directional_playback_all=Routine({
@@ -137,13 +129,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -151,18 +140,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~bath_fill_1=Routine({
@@ -200,10 +184,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -211,18 +193,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~bath_fill_2=Routine({
@@ -257,13 +234,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -271,18 +245,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~bath_fill_3=Routine({
@@ -320,10 +289,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -331,18 +298,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~bath_fill_4=Routine({
@@ -377,13 +339,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -391,18 +350,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~bath_drain_1=Routine({
@@ -437,13 +391,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -451,18 +402,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~bath_drain_2=Routine({
@@ -500,10 +446,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -511,18 +455,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~bath_drain_3=Routine({
@@ -560,10 +499,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -571,18 +508,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~bath_drain_4=Routine({
@@ -620,10 +552,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -631,18 +561,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 
@@ -681,10 +606,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -692,18 +615,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~microwave_2=Routine({
@@ -741,10 +659,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -752,18 +668,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~microwave_3=Routine({
@@ -801,10 +712,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -812,18 +721,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~microwave_4=Routine({
@@ -861,10 +765,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -872,16 +774,12 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
 
 	});
@@ -918,13 +816,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -932,16 +827,12 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
 
 	});
@@ -978,13 +869,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -992,18 +880,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~door_slam_3=Routine({
@@ -1038,13 +921,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1052,16 +932,12 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
 
 	});
@@ -1098,13 +974,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1112,16 +985,12 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
 
 	});
@@ -1159,13 +1028,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1173,16 +1039,12 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
 
 	});
@@ -1219,13 +1081,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1233,16 +1092,12 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
 
 	});
@@ -1279,13 +1134,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1293,8 +1145,6 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
 
@@ -1302,9 +1152,7 @@ g.latency=0;
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~voice_4=Routine({
@@ -1339,13 +1187,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1353,18 +1198,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~noise_1=Routine({
@@ -1402,10 +1242,8 @@ g.latency=0;
 
 	sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
-		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	2.wait;
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1413,16 +1251,12 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
 
 	});
@@ -1459,14 +1293,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
 	2.wait;
-
-	//Setting up playback
-	(30*~gap_size).wait;
-
+	g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1474,18 +1304,13 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
-
 	});
 
 ~noise_3=Routine({
@@ -1520,13 +1345,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
 		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+		g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1534,16 +1356,12 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
 
 	});
@@ -1580,13 +1398,10 @@ g.latency=0;
 		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
 		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
 		sys_out.put(51,playlist.at(3).at(\weight););
-
-	sys_out=sys_out.as(Int8Array);
+		sys_out=sys_out.as(Int8Array);
 	g.sysex(sys_out);
 		2.wait;
-	//Setting up playback
-	(30*~gap_size).wait;
-
+		g.start;
 		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
@@ -1594,16 +1409,12 @@ g.latency=0;
 		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
 		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
-
-	g.start;
 	(120+~gap_size).wait;
 	g.stop;
-
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
 	if(playlist.at(1).at(\sig)>0,{synth.at(1).free;},{});
 	if(playlist.at(2).at(\sig)>0,{synth.at(2).free;},{});
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
-
 	5.wait;
 
 	});
