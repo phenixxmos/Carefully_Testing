@@ -1499,7 +1499,7 @@ SynthDef.new(\send_m,{|amp=1,cal,out=0,send,bufnum=7,lp=0|
 s.boot;
 ~noi_cal=[1,1,1,1];
 
-~bath_fill_1.play;
+
 
 ~test_player=~bath_drain_1++~bath_drain_2++~bath_drain_3++~bath_drain_4++~bath_fill_1++~bath_fill_2++~bath_fill_3++~bath_fill_3++~microwave_1++~microwave_2++~microwave_3++~microwave_4++~door_slam_1++~door_slam_2++~door_slam_3++~door_slam_4++~voice_1++~voice_2++~voice_3++~voice_4++~noise_1++~noise_2++~noise_3++~noise_4++~fin;
 
