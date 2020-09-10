@@ -8,7 +8,7 @@ var path,spath,l,rec_path,sender,receiver;
 
 
 path=PathName.new(File.getcwd++"/Playback_samples/");
-rec_path="/home/pi/Carefully_Testing/recordings_normal_orientation/";
+rec_path="/home/pi/Carefully_Testing/recordings_error_check/";
 //rec_path="/Users/phenix/Documents/Cherish/V2_testing/";
 ~gap_size=0.05;
 ~mic_input=0;
@@ -26,7 +26,7 @@ spath.do({|path,i|
 ~rec_raw=Recorder(s);
 ~raw_bus=Bus.audio(s,8);
 ~rec_crpd=Recorder(s);
-~crpd_bus=~raw_bus.ar(3,5);
+~crpd_bus==Bus.audio(s,3);
 ~passthrough=Group.new;
 ~rec_raw.recSampleFormat="int16";
 ~rec_raw.recHeaderFormat="WAV";
@@ -116,7 +116,7 @@ spath.do({|path,i|
 	MIDIClient.init;
 
 	MIDIdef.sysex(\parse,{|val,src|
-		val.postln;
+		var prep;
 	switch(val[1],
 		0,{
 			var l_sum,room_condition,firmware,signal,weight;
@@ -169,12 +169,18 @@ spath.do({|path,i|
 				~raw_path=~papn++"raw/";
 		});
 
-					~rec_raw.prepareForRecord(format("%Raw_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.wav",~raw_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:8);
+prep=Routine({
+			(~gap_size*5).wait;
+
+			~rec_raw.prepareForRecord(format("%Raw_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.wav",~raw_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:8);
 
 			~rec_crpd.prepareForRecord(format("%Three_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.wav",~crpd_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:3);
+});
 
-		~mlis=Synth(\mic_listen_VS,[\in,~mic_input,\out,~raw_bus],~passthrough);
-		~mcrpd=Synth(\mic_listen_crpd,[\in,~mic_input,\out,~crpd_bus],~passthrough);
+		prep.play;
+
+			~mlis=Synth(\mic_listen_VS,[\in,~mic_input,\out,~raw_bus],~passthrough);
+			~mcrpd=Synth(\mic_listen_crpd,[\in,~mic_input,\out,~crpd_bus],~passthrough);
 
 	});
 
