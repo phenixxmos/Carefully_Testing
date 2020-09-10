@@ -140,7 +140,7 @@ spath.do({|path,i|
 			//location 2
 			    ~out.add(\s2l->Dictionary.with(*[\x->~expandq.value(val[24],val[23]),\y->~expandq.value(val[22],val[21]),\z->~expandq.value(val[20],val[19])]););
 
-				if(~signal.getID(~expand.value(val[26],val[25]))==0,{~out.add(\s2p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[26],val[25])),'signal num'->~expand.value(val[26],val[25]),\level->0,\weight->weight.getID(val[29])]););},
+				if(~signal.getID(~expand.value(val[28],val[27]))==0,{~out.add(\s2p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[26],val[25])),'signal num'->~expand.value(val[26],val[25]),\level->0,\weight->weight.getID(val[29])]););},
 					{~out.add(\s2p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[26],val[25])),'signal num'->~expand.value(val[26],val[25]),\level->~expandq.value(val[28],val[27]),\weight->weight.getID(val[29])]););});
 
 
