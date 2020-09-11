@@ -205,24 +205,9 @@ prep=Routine({
 		~rec_raw.record(bus:~raw_bus,node:~passthrough);
 		~rec_crpd.record(bus:~crpd_bus,node:~passthrough);
 		});
-	~nah=Routine({
-			var l,s,out;
-	~tau_write.write("Seconds,Reported Azimuth (°),Reported Elevation(°),L1 Signal (#),L1 Signal,L1 Level,L1 weight,L1 Spherical Radius (inches),L1 Elevation Relative XVS4000 (inches),L1 True Azimuth (°),L1 True Elevation (°),L2 Signal (#),L2 Signal,L2 Level,L2 weight,L2 Spherical Radius (inches),L2 Elevation Relative XVS4000 (inches),L2 True Azimuth (°),L2 True Elevation (°),L3 Signal (#),L3 Signal,L3 Level,L3 weight,L3 Spherical Radius (inches),L3 Elevation Relative XVS4000 (inches),L3 True Azimuth (°),L3 True Elevation (°),L4 Signal (#),L4 Signal,L4 Level,L4 weight,L4 Spherical Radius (inches),L4 Elevation Relative XVS4000 (inches),L4 True Azimuth (°),L4 True Elevation (°),Firmware,Script Version,\n");
-			while({~rec_csv},{
-				l=Pipe.new("cd /home/pi/november-2018/app_device_control/bin && ./vsctrl doa_peak get","r");
-				l.getLine;
-				l.getLine;
-				s=l.getLine.split($ );
-				l.close;
-		out=format("%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,%,\n",thisThread.seconds,s.at(4),s.at(10),~out[\s1p]['signal num'],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s1r]['spherical Radius'],~out[\s1r][\elevation],~out[\s1r]['azimuth angle'],~out[\s1r]['elavation angle'],~out[\s2p]['signal num'],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s2r]['spherical Radius'],~out[\s2r][\elevation],~out[\s2r]['azimuth angle'],~out[\s2r]['elavation angle'],~out[\s3p]['signal num'],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s3r]['spherical Radius'],~out[\s3r][\elevation],~out[\s3r]['azimuth angle'],~out[\s3r]['elavation angle'],~out[\s4p]['signal num'],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\s4r]['spherical Radius'],~out[\s4r][\elevation],~out[\s4r]['azimuth angle'],~out[\s4r]['elavation angle'],~out[\Firmware],~out[\Version]);
-				~tau_write.write(out);
-				1.wait;
-			});
 
-		});
-			"Recording Started".postln;
+		"Recording Started".postln;
 		player.play;
-		~nah.play;
 	});
 
 	MIDIdef.stop(\freer,{|src|
