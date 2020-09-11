@@ -15,8 +15,9 @@ execute file path
 
 (var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_reciever.scd");)
 (var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_sender.scd");)
+(var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_reciever_no_logging.scd");)
 
-~noi_cal=[0.25,0.25,0.25,0.25];
+~noi_cal=[0.125,0.125,0.125,0.125];
 ~directional_playback_all.play;
 
 
