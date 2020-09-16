@@ -10,8 +10,8 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 //path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 
-	// # test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,firmware_id,room_c=this.compileFile(File.getcwd++"sender_config.scd").value();
-	# test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,firmware_id,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
+	# test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,firmware_id,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
+//	# test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,firmware_id,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
 
 
 speak4.postln;
