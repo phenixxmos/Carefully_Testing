@@ -5,14 +5,13 @@ m.numBuffers=2000;
 
 s.doWhenBooted({
 var path,spath,l,rec_path,sender,receiver;
-
-
 path=PathName.new(File.getcwd++"/Playback_samples/");
-rec_path="/home/pi/Carefully_Testing/mic_recorder/";
-//rec_path="/Users/phenix/Documents/Cherish/V2_testing/";
-~gap_size=0.05;
-~mic_input=0;
-~mic_positon=Dictionary.with(*[\x->79.2,\y->99.6,\z->31.2]);
+	// # rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"reciever_config").value();
+# rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
+
+~gap_size=gap;
+~mic_input=m_in;
+~mic_positon=m_pos;
 
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;

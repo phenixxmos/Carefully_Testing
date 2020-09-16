@@ -4,27 +4,17 @@ m.numInputBusChannels=10;
 m.numBuffers=2000;
 
 s.doWhenBooted({
-var path,spath,l,test_config,major,minor,patch,dev_id,firmware_id,room_c,level,room_condition,firmware,sender,receiver,speak1,speak2,speak3,speak4;
-room_condition=TwoWayIdentityDictionary[\Normal->0,\Closed->1,\Open->2];
-firmware=TwoWayIdentityDictionary['APP-MIC-RECORDER_DDR426797A2936B'->0,'VocalSorcery_1.0.4'->1];
-
+var path,spath,l,test_config,major,minor,patch,dev_id,firmware_id,room_c,level,sender,receiver,speak1,speak2,speak3,speak4;
 
 path=PathName.new(File.getcwd++"/Playback_samples/");
 //path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 
-test_config=0;
-major=1;
-minor=0;
-patch=0;
-dev_id=6;
-speak1=Dictionary.with(*[\x->80.5,\y->148.2,\z->41.75]); //inches
-speak2=Dictionary.with(*[\x->111.5,\y->136.1,\z->41.75]);
-speak3=Dictionary.with(*[\x->128,\y->101.4,\z->41.75]);
-speak4=Dictionary.with(*[\x->114,\y->68.9,\z->41.75]);
-firmware_id=firmware.at('APP-MIC-RECORDER_DDR426797A2936B');
-room_c=room_condition.at(\Open);
+	// # test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,firmware_id,room_c=this.compileFile(File.getcwd++"sender_config.scd").value();
+	# test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,firmware_id,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
 
+
+speak4.postln;
 ~gap_size=0.05;
 
 
@@ -35,7 +25,7 @@ path.entries.do({|path|
 	spath.add(path.absolutePath);
 });
 spath.do({|path,i|
-		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
+	~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
 	~samp.add(Buffer.read(s,path));
 });
 ~signal.put(\silence,0);
