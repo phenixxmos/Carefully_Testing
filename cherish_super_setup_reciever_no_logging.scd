@@ -38,7 +38,8 @@ spath.do({|path,i|
 ~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
 ~nickn.put('white_noise@xxxxxxx',~signal.at('White_Noise'));
 ~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('Person_3_48kHz_chopped'));
-~playback_list=File(format("%Playback_list.csv","/Users/phenix/Documents/Cherish/V2_testing/"),"w");
+// ~playback_list=File(format("%Playback_list.csv","/Users/phenix/Documents/Cherish/V2_testing/"),"w");
+~playback_list=File(format("%Playback_list.csv",rec_path),"w");
 ~playback_list.write("Number,nick_name,fullname,\n");
 ~signal.do({|path,i|
 	var out;
