@@ -12,10 +12,7 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 
 ~gap_size=gap;
 ~mic_input=m_in;
-	// ~mic_positon=m_pos;a
-
-
-	// ~mic_position.postln;
+~mic_positon=Dictionary.with(*[\x->79.2,\y->99.6,\z->31.2]);
 
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;
@@ -139,7 +136,7 @@ rec_path.postln;
 				if(~expand.value(val[15],val[14])==0,{~out.add(\s1p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[15],val[14])),'signal num'->~expand.value(val[15],val[14]),\level->0,\weight->weight.getID(val[18])]);); },{
 					~out.add(\s1p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[15],val[14])),'signal num'->~expand.value(val[15],val[14]),\level->~expandq.value(val[17],val[16]),\weight->weight.getID(val[18])]););});
 
-				~out.add(\s1r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s1l),m_pos),'spherical Radius'->~sphere_radius.value(~out.at(\s1l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s1l),m_pos),'elavation angle'->~elevation_θ.value(~out.at(\s1l),m_pos)]););
+				~out.add(\s1r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s1l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s1l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s1l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s1l),m_pos)]););
 
 			//location 2
 			    ~out.add(\s2l->Dictionary.with(*[\x->~expandq.value(val[24],val[23]),\y->~expandq.value(val[22],val[21]),\z->~expandq.value(val[20],val[19])]););
@@ -148,21 +145,21 @@ rec_path.postln;
 					{~out.add(\s2p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[26],val[25])),'signal num'->~expand.value(val[26],val[25]),\level->~expandq.value(val[28],val[27]),\weight->weight.getID(val[29])]););});
 
 
-				~out.add(\s2r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s2l),m_pos),'spherical Radius'->~sphere_radius.value(~out.at(\s2l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s2l),m_pos),'elavation angle'->~elevation_θ.value(~out.at(\s2l),m_pos)]););
+				~out.add(\s2r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s2l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s2l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s2l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s2l),m_pos)]););
 
 			//location 3
 			    ~out.add(\s3l->Dictionary.with(*[\x->~expandq.value(val[35],val[34]),\y->~expandq.value(val[33],val[32]),\z->~expandq.value(val[31],val[30])]););
 
 				if(~expand.value(val[37],val[36])==0,{~out.add(\s3p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[37],val[36])),'signal num'->~expand.value(val[37],val[36]),\level->0,\weight->weight.getID(val[40])]););},{~out.add(\s3p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[37],val[36])),'signal num'->~expand.value(val[37],val[36]),\level->~expandq.value(val[39],val[38]),\weight->weight.getID(val[40])]););});
 
-				~out.add(\s3r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s3l),m_pos),'spherical Radius'->~sphere_radius.value(~out.at(\s3l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s3l),m_pos),'elavation angle'->~elevation_θ.value(~out.at(\s3l),m_pos)]););
+				~out.add(\s3r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s3l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s3l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s3l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s3l),m_pos)]););
 
 				//location 4
 			    ~out.add(\s4l->Dictionary.with(*[\x->~expandq.value(val[46],val[45]),\y->~expandq.value(val[44],val[43]),\z->~expandq.value(val[42],val[41])]););
 
 				if(~expand.value(val[48],val[47])==0,{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[48],val[47])),'signal num'->~expand.value(val[48],val[47]),\level->0,\weight->weight.getID(val[51])]););},{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[48],val[47])),'signal num'->~expand.value(val[48],val[47]),\level->~expandq.value(val[50],val[49]),\weight->weight.getID(val[51])]););});
 
-				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),m_pos),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),m_pos),'elavation angle'->~elevation_θ.value(~out.at(\s4l),m_pos)]););
+				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),m_pos)]););
 
 		}
 	);
