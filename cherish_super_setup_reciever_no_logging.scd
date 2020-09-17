@@ -4,7 +4,7 @@ m.numInputBusChannels=8;
 m.numBuffers=2000;
 
 s.doWhenBooted({
-var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos;
+var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware;
 path=PathName.new(File.getcwd++"/Playback_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 # rec_path,gap,m_in,m_pos,id,firmware=this.compileFile(File.getcwd++"/reciever_config.scd").value();
