@@ -14,8 +14,12 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 ~gap_size=gap;
 ~mic_input=m_in;
 //~mic_positon=Dictionary.with(*[\x->79.2,\y->99.6,\z->31.2]);
-~mic_positon=m_pos;
+~mic_positon=Dictionary.new;
+~mic_positon.add(\x->m_pos.at(\x));
+~mic_positon.add(\y->m_pos.at(\y));
+~mic_positon.add(\z->m_pos.at(\z));
 m_pos.postln;
+~mic_positon.postln;
 
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;
