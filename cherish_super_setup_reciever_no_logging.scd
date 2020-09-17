@@ -7,7 +7,7 @@ s.doWhenBooted({
 var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos;
 path=PathName.new(File.getcwd++"/Playback_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
-# rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"/reciever_config.scd").value();
+# rec_path,gap,m_in,m_pos,id,firmware=this.compileFile(File.getcwd++"/reciever_config.scd").value();
 //# rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
 
 ~gap_size=gap;
@@ -16,6 +16,8 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 ~mic_positon.add(\x->m_pos.at(\x));
 ~mic_positon.add(\y->m_pos.at(\y));
 ~mic_positon.add(\z->m_pos.at(\z));
+~d_id=id;
+~firmwarz=firmware;
 ~mic_positon.postln;
 
 spath=SortedList.new(size: 8);
@@ -130,8 +132,8 @@ spath.do({|path,i|
 				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
 
 			~out.add(\Version->format("%.%.%",val[2],val[3],val[4]));
-			~out.add(\ID->val[5]);
-			~out.add(\Firmware->firmware.getID(val[6]););
+			~out.add(\ID->~d_id);
+			~out.add(\Firmware->~firmwarz);
 			~out.add(\Condition->room_condition.getID(val[7]););
 
 			//location 1
@@ -164,6 +166,8 @@ spath.do({|path,i|
 				if(~expand.value(val[48],val[47])==0,{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[48],val[47])),'signal num'->~expand.value(val[48],val[47]),\level->0,\weight->weight.getID(val[51])]););},{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[48],val[47])),'signal num'->~expand.value(val[48],val[47]),\level->~expandq.value(val[50],val[49]),\weight->weight.getID(val[51])]););});
 
 				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),m_pos)]););
+
+				~out.postln;
 
 		}
 	);

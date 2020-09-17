@@ -4,7 +4,7 @@ m.numInputBusChannels=8;
 m.numBuffers=2000;
 
 s.doWhenBooted({
-var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos;
+var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware;
 path=PathName.new(File.getcwd++"/Playback_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 # rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"/reciever_config.scd").value();
@@ -12,10 +12,13 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 
 ~gap_size=gap;
 ~mic_input=m_in;
+~IDz=
+~firmz=
 ~mic_positon=Dictionary.new;
 ~mic_positon.add(\x->m_pos.at(\x));
 ~mic_positon.add(\y->m_pos.at(\y));
 ~mic_positon.add(\z->m_pos.at(\z));
+
 ~mic_positon.postln;
 
 spath=SortedList.new(size: 8);
@@ -97,8 +100,8 @@ rec_path.postln;
 ~sphere_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y)),(speak.at(\z)-mic.at(\z))].squared.sum.sqrt;}; //computes Spherical radius
 ~cylinder_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;};//computes Cylindrical radius
 ~elevation={|speak,mic| (speak.at(\z)-mic.at(\z));}; //finds the elavtion relative to the microphone board
-	~elevation_θ={|speak,mic| ~rad2degree.value(atan2((speak.at(\z)-mic.at(\z)),([(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;)));}; //finds the elavtion angle
-	~azimuth_φ={|speak,mic| ~rad2degree.value(atan2((speak.at(\y)-mic.at(\y)),(speak.at(\x)-mic.at(\x))));};  //finds Azimuth angle
+~elevation_θ={|speak,mic| ~rad2degree.value(atan2((speak.at(\z)-mic.at(\z)),([(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;)));}; //finds the elavtion angle
+~azimuth_φ={|speak,mic| ~rad2degree.value(atan2((speak.at(\y)-mic.at(\y)),(speak.at(\x)-mic.at(\x))));};  //finds Azimuth angle
 
 	/**
 	~mlis -the 8 channel mic listener
@@ -130,8 +133,8 @@ rec_path.postln;
 				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
 
 			~out.add(\Version->format("%.%.%",val[2],val[3],val[4]));
-			~out.add(\ID->val[5]);
-			~out.add(\Firmware->firmware.getID(val[6]););
+			~out.add(\ID->~d_id);
+			~out.add(\Firmware->~firmwarz);
 			~out.add(\Condition->room_condition.getID(val[7]););
 
 			//location 1
