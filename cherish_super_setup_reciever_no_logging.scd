@@ -22,6 +22,7 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;
+~nickn=TwoWayIdentityDictionary.new;
 path.entries.do({|path|
 	spath.add(path.absolutePath);
 });
@@ -29,6 +30,22 @@ spath.do({|path,i|
 		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
 });
 ~signal.put(\silence,0);
+
+~nickn.put('tub_fill@xxxxxxxxxx',~signal.at('024_Bathtub Fill'));
+~nickn.put('tub_drain@xxxxxxxxx',~signal.at('025_Bathtub Drain'));
+~nickn.put('door_slam@xxxxxxxxx',~signal.at('07_Door Open and Slam'));
+~nickn.put('microwave@xxxxxxxxx',~signal.at('038_Microwave'));
+~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
+~nickn.put('white_noise@xxxxxxx',~signal.at('White_Noise'));
+~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('Person_3_48kHz_chopped'));
+~playback_list=File(format("%Playback_list.csv","/Users/phenix/Documents/Cherish/V2_testing/"),"w");
+~playback_list.write("Number,nick_name,fullname,\n");
+~signal.do({|path,i|
+	var out;
+	out=format("%,%,%,\n",i,~nickn.getID(i),~signal.getID(i));
+	~playback_list.write(out);
+});
+~playback_list.close;
 ~rec_raw=Recorder(s);
 ~raw_bus=Bus.audio(s,8);
 ~rec_crpd=Recorder(s);

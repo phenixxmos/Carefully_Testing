@@ -12,17 +12,17 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 
 ~gap_size=gap;
 ~mic_input=m_in;
-~IDz=
-~firmz=
 ~mic_positon=Dictionary.new;
 ~mic_positon.add(\x->m_pos.at(\x));
 ~mic_positon.add(\y->m_pos.at(\y));
 ~mic_positon.add(\z->m_pos.at(\z));
-
+~d_id=id;
+~firmwarz=firmware;
 ~mic_positon.postln;
 
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;
+~nickn=TwoWayIdentityDictionary.new;
 path.entries.do({|path|
 	spath.add(path.absolutePath);
 });
@@ -30,6 +30,21 @@ spath.do({|path,i|
 		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
 });
 ~signal.put(\silence,0);
+~nickn.put('tub_fill@xxxxxxxxxx',~signal.at('024_Bathtub Fill'));
+~nickn.put('tub_drain@xxxxxxxxx',~signal.at('025_Bathtub Drain'));
+~nickn.put('door_slam@xxxxxxxxx',~signal.at('07_Door Open and Slam'));
+~nickn.put('microwave@xxxxxxxxx',~signal.at('038_Microwave'));
+~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
+~nickn.put('white_noise@xxxxxxx',~signal.at('White_Noise'));
+~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('Person_3_48kHz_chopped'));
+~playback_list=File(format("%Playback_list.csv","/Users/phenix/Documents/Cherish/V2_testing/"),"w");
+~playback_list.write("Number,nick_name,fullname,\n");
+~signal.do({|path,i|
+	var out;
+	out=format("%,%,%,\n",i,~nickn.getID(i),~signal.getID(i));
+	~playback_list.write(out);
+});
+~playback_list.close;
 ~rec_raw=Recorder(s);
 ~raw_bus=Bus.audio(s,8);
 ~rec_crpd=Recorder(s);
@@ -88,7 +103,7 @@ spath.do({|path,i|
 		{File.mkdir(~panorm++"raw/");"Normal/raw/ Created".postln;},
 		{"Normal/raw/ Directory already exist".postln;}
 	);
-rec_path.postln;
+	rec_path.postln;
 ~upper={|x| x.rightShift(7).asInteger;}; //splits 14bit integer into upper 7
 ~lower={|x| x.asBinaryDigits(numDigits:7).convertDigits(base:2).asInteger;}; //splits 14bit integer into lower 7
 ~expand={|upper,lower| ((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2));}; //recombines up and low
@@ -100,8 +115,8 @@ rec_path.postln;
 ~sphere_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y)),(speak.at(\z)-mic.at(\z))].squared.sum.sqrt;}; //computes Spherical radius
 ~cylinder_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;};//computes Cylindrical radius
 ~elevation={|speak,mic| (speak.at(\z)-mic.at(\z));}; //finds the elavtion relative to the microphone board
-~elevation_θ={|speak,mic| ~rad2degree.value(atan2((speak.at(\z)-mic.at(\z)),([(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;)));}; //finds the elavtion angle
-~azimuth_φ={|speak,mic| ~rad2degree.value(atan2((speak.at(\y)-mic.at(\y)),(speak.at(\x)-mic.at(\x))));};  //finds Azimuth angle
+	~elevation_θ={|speak,mic| ~rad2degree.value(atan2((speak.at(\z)-mic.at(\z)),([(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;)));}; //finds the elavtion angle
+	~azimuth_φ={|speak,mic| ~rad2degree.value(atan2((speak.at(\y)-mic.at(\y)),(speak.at(\x)-mic.at(\x))));};  //finds Azimuth angle
 
 	/**
 	~mlis -the 8 channel mic listener
@@ -143,7 +158,7 @@ rec_path.postln;
 				if(~expand.value(val[15],val[14])==0,{~out.add(\s1p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[15],val[14])),'signal num'->~expand.value(val[15],val[14]),\level->0,\weight->weight.getID(val[18])]);); },{
 					~out.add(\s1p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[15],val[14])),'signal num'->~expand.value(val[15],val[14]),\level->~expandq.value(val[17],val[16]),\weight->weight.getID(val[18])]););});
 
-				~out.add(\s1r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s1l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s1l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s1l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s1l),~mic_positon)]););
+				~out.add(\s1r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s1l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s1l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s1l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s1l),m_pos)]););
 
 			//location 2
 			    ~out.add(\s2l->Dictionary.with(*[\x->~expandq.value(val[24],val[23]),\y->~expandq.value(val[22],val[21]),\z->~expandq.value(val[20],val[19])]););
@@ -152,21 +167,23 @@ rec_path.postln;
 					{~out.add(\s2p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[26],val[25])),'signal num'->~expand.value(val[26],val[25]),\level->~expandq.value(val[28],val[27]),\weight->weight.getID(val[29])]););});
 
 
-				~out.add(\s2r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s2l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s2l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s2l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s2l),~mic_positon)]););
+				~out.add(\s2r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s2l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s2l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s2l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s2l),m_pos)]););
 
 			//location 3
 			    ~out.add(\s3l->Dictionary.with(*[\x->~expandq.value(val[35],val[34]),\y->~expandq.value(val[33],val[32]),\z->~expandq.value(val[31],val[30])]););
 
 				if(~expand.value(val[37],val[36])==0,{~out.add(\s3p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[37],val[36])),'signal num'->~expand.value(val[37],val[36]),\level->0,\weight->weight.getID(val[40])]););},{~out.add(\s3p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[37],val[36])),'signal num'->~expand.value(val[37],val[36]),\level->~expandq.value(val[39],val[38]),\weight->weight.getID(val[40])]););});
 
-				~out.add(\s3r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s3l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s3l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s3l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s3l),~mic_positon)]););
+				~out.add(\s3r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s3l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s3l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s3l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s3l),m_pos)]););
 
 				//location 4
 			    ~out.add(\s4l->Dictionary.with(*[\x->~expandq.value(val[46],val[45]),\y->~expandq.value(val[44],val[43]),\z->~expandq.value(val[42],val[41])]););
 
 				if(~expand.value(val[48],val[47])==0,{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[48],val[47])),'signal num'->~expand.value(val[48],val[47]),\level->0,\weight->weight.getID(val[51])]););},{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[48],val[47])),'signal num'->~expand.value(val[48],val[47]),\level->~expandq.value(val[50],val[49]),\weight->weight.getID(val[51])]););});
 
-				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),~mic_positon)]););
+				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),m_pos)]););
+
+				~out.postln;
 
 		}
 	);
