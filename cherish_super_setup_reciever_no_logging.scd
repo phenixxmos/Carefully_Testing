@@ -6,8 +6,8 @@ m.numBuffers=2000;
 s.doWhenBooted({
 var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos;
 path=PathName.new(File.getcwd++"/Playback_samples/");
-	// # rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"reciever_config").value();
-# rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
+# rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"/reciever_config").value();
+//# rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
 
 
 ~gap_size=gap;
