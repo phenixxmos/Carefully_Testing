@@ -183,20 +183,65 @@ spath.do({|path,i|
 
 				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),m_pos)]););
 
-				~out.postln;
 
-				~r_p.postln;
-	if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
+if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 		{
 						var pos_data;
 						pos_data=File(format("%Positional_Data_machine.csv",~r_p),"w");
+
 						pos_data.write(format("%,%,\n","Room_Condition",~out.at(\Condition)));
-						pos_data.write(format("%,%,\n","Room_Condition",~out.at(\Condition)));
+						pos_data.write(format("%,%,\n","Program_Number",0));
+
+						pos_data.write(format("%,%,\n","L1E",~out.at(\s1r).at('elavation angle')));
+						pos_data.write(format("%,%,\n","L1A",~out.at(\s1r).at('azimuth angle')));
+						pos_data.write(format("%,%,\n","L1RANGE",~out.at(\s1r).at('cylinder Radius')));
+						pos_data.write(format("%,%,\n","L1SPHERE",~out.at(\s1r).at('spherical Radius')));
+						pos_data.write(format("%,%,\n","L1ELEVATION",~out.at(\s1r).at(\elevation)));
+
+						pos_data.write(format("%,%,\n","L2E",~out.at(\s2r).at('elavation angle')));
+						pos_data.write(format("%,%,\n","L2A",~out.at(\s2r).at('azimuth angle')));
+						pos_data.write(format("%,%,\n","L2RANGE",~out.at(\s2r).at('cylinder Radius')));
+						pos_data.write(format("%,%,\n","L2SPHERE",~out.at(\s2r).at('spherical Radius')));
+						pos_data.write(format("%,%,\n","L2ELEVATION",~out.at(\s2r).at(\elevation)));
+
+						pos_data.write(format("%,%,\n","L3E",~out.at(\s3r).at('elavation angle')));
+						pos_data.write(format("%,%,\n","L3A",~out.at(\s3r).at('azimuth angle')));
+						pos_data.write(format("%,%,\n","L3RANGE",~out.at(\s3r).at('cylinder Radius')));
+						pos_data.write(format("%,%,\n","L3SPHERE",~out.at(\s3r).at('spherical Radius')));
+						pos_data.write(format("%,%,\n","L3ELEVATION",~out.at(\s3r).at(\elevation)));
+
+						pos_data.write(format("%,%,\n","L4E",~out.at(\s4r).at('elavation angle')));
+						pos_data.write(format("%,%,\n","L4A",~out.at(\s4r).at('azimuth angle')));
+						pos_data.write(format("%,%,\n","L4RANGE",~out.at(\s4r).at('cylinder Radius')));
+						pos_data.write(format("%,%,\n","L4SPHERE",~out.at(\s4r).at('spherical Radius')));
+						pos_data.write(format("%,%,\n","L4ELEVATION",~out.at(\s4r).at(\elevation)));
+
+						pos_data.write(format("%,%,\n","L1X",~out.at(\s1l).at(\x)));
+						pos_data.write(format("%,%,\n","L1Y",~out.at(\s1l).at(\y)));
+						pos_data.write(format("%,%,\n","L1Z",~out.at(\s1l).at(\z)));
+
+						pos_data.write(format("%,%,\n","L2X",~out.at(\s2l).at(\x)));
+						pos_data.write(format("%,%,\n","L2Y",~out.at(\s2l).at(\y)));
+						pos_data.write(format("%,%,\n","L2Z",~out.at(\s2l).at(\z)));
+
+						pos_data.write(format("%,%,\n","L3X",~out.at(\s3l).at(\x)));
+						pos_data.write(format("%,%,\n","L3Y",~out.at(\s3l).at(\y)));
+						pos_data.write(format("%,%,\n","L3Z",~out.at(\s3l).at(\z)));
+
+						pos_data.write(format("%,%,\n","L4X",~out.at(\s4l).at(\x)));
+						pos_data.write(format("%,%,\n","L4Y",~out.at(\s4l).at(\y)));
+						pos_data.write(format("%,%,\n","L4Z",~out.at(\s4l).at(\z)));
+
+						pos_data.write(format("%,%,\n","MX",~mic_positon.at(\x)));
+						pos_data.write(format("%,%,\n","MY",~mic_positon.at(\y)));
+						pos_data.write(format("%,%,\n","MZ",~mic_positon.at(\z)));
+
 						pos_data.close;
 
 					},
 		{"Positional_Data_machine.csv  file already exist".postln;}
 	);
+
 
 		}
 	);
