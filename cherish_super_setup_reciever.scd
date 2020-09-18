@@ -5,10 +5,10 @@ m.numBuffers=2000;
 
 s.doWhenBooted({
 var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware;
-path=PathName.new(File.getcwd++"/Playback_samples/");
-//path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
-# rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"/reciever_config.scd").value();
-//# rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
+	path=PathName.new(File.getcwd++"/Playback_samples/");
+	// path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
+	# rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"/reciever_config.scd").value();
+	// # rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
 
 ~r_p=rec_path;
 ~gap_size=gap;
@@ -19,7 +19,6 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 ~mic_positon.add(\z->m_pos.at(\z));
 ~d_id=id;
 ~firmwarz=firmware;
-~mic_positon.postln;
 
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;
@@ -105,7 +104,6 @@ spath.do({|path,i|
 		{File.mkdir(~panorm++"raw/");"Normal/raw/ Created".postln;},
 		{"Normal/raw/ Directory already exist".postln;}
 	);
-	~r_p.postln;
 ~upper={|x| x.rightShift(7).asInteger;}; //splits 14bit integer into upper 7
 ~lower={|x| x.asBinaryDigits(numDigits:7).convertDigits(base:2).asInteger;}; //splits 14bit integer into lower 7
 ~expand={|upper,lower| ((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2));}; //recombines up and low
@@ -187,7 +185,7 @@ spath.do({|path,i|
 
 				~out.postln;
 
-
+				~r_p.postln;
 	if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 		{
 						var pos_data;

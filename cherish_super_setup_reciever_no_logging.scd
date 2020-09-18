@@ -5,11 +5,12 @@ m.numBuffers=2000;
 
 s.doWhenBooted({
 var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware;
-path=PathName.new(File.getcwd++"/Playback_samples/");
-//path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
-# rec_path,gap,m_in,m_pos,id,firmware=this.compileFile(File.getcwd++"/reciever_config.scd").value();
-//# rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
+	// path=PathName.new(File.getcwd++"/Playback_samples/");
+	path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
+	// # rec_path,gap,m_in,m_pos,id,firmware=this.compileFile(File.getcwd++"/reciever_config.scd").value();
+	# rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
 
+~r_p=rec_path;
 ~gap_size=gap;
 ~mic_input=m_in;
 ~mic_positon=Dictionary.new;
@@ -18,7 +19,6 @@ path=PathName.new(File.getcwd++"/Playback_samples/");
 ~mic_positon.add(\z->m_pos.at(\z));
 ~d_id=id;
 ~firmwarz=firmware;
-~mic_positon.postln;
 
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;
@@ -30,7 +30,6 @@ spath.do({|path,i|
 		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
 });
 ~signal.put(\silence,0);
-
 ~nickn.put('tub_fill@xxxxxxxxxx',~signal.at('024_Bathtub Fill'));
 ~nickn.put('tub_drain@xxxxxxxxx',~signal.at('025_Bathtub Drain'));
 ~nickn.put('door_slam@xxxxxxxxx',~signal.at('07_Door Open and Slam'));
@@ -185,9 +184,7 @@ spath.do({|path,i|
 
 				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),m_pos),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),m_pos)]););
 
-				~out.postln;
-
-
+				~r_p.postln;
 	if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 		{
 						var pos_data;
@@ -204,18 +201,14 @@ spath.do({|path,i|
 	);
 		switch(~out[\Condition],
 		\Normal,{
-				~tau_write=File(format("%Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.csv",~panorm,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),"w");
 				~crpd_path=~panorm++"three_channels/";
 				~raw_path=~panorms++"raw/";
-
 			},
 		\Closed,{
-				~tau_write=File(format("%Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.csv",~paclsd,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),"w");
 				~crpd_path=~paclsd++"three_channels/";
 				~raw_path=~paclsd++"raw/";
 			},
 		\Open,{
-				~tau_write=File(format("%Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.csv",~papn,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),"w");
 				~crpd_path=~papn++"three_channels/";
 				~raw_path=~papn++"raw/";
 		});
