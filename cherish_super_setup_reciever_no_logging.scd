@@ -192,8 +192,8 @@ spath.do({|path,i|
 						var pos_data;
 						pos_data=File(format("%Positional_Data_machine.csv",~r_p),"w");
 
-						pos_data.write(format("%,%,\n","Room_Condition",~out.at(\Condition)));
-						pos_data.write(format("%,%,\n","Test_Condition",0));
+						pos_data.write(format("%,%,\n","Room_Condition",~out.at('Room Condition')));
+						pos_data.write(format("%,%,\n","Test_Condition",~out.at('Test Configuration')));
 
 						pos_data.write(format("%,%,\n","L1E",~out.at(\s1r).at('elavation angle')));
 						pos_data.write(format("%,%,\n","L1A",~out.at(\s1r).at('azimuth angle')));
@@ -238,9 +238,10 @@ spath.do({|path,i|
 						pos_data.write(format("%,%,\n","MX",~mic_positon.at(\x)));
 						pos_data.write(format("%,%,\n","MY",~mic_positon.at(\y)));
 						pos_data.write(format("%,%,\n","MZ",~mic_positon.at(\z)));
+						pos_data.write(format("%,%,\n","ID",~out.at(\ID)));
+						pos_data.write(format("%,%,\n","Firmware",~out.at(\Firmware)));
 
 						pos_data.close;
-
 					},
 		{"Positional_Data_machine.csv  file already exist".postln;}
 	);
