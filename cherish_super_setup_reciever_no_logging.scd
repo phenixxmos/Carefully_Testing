@@ -248,7 +248,7 @@ spath.do({|path,i|
 
 		}
 	);
-		switch(~out[\Condition],
+		switch(~out['Room Condition'],
 		\Normal,{
 				~crpd_path=~panorm++"three_channels/";
 				~raw_path=~panorms++"raw/";

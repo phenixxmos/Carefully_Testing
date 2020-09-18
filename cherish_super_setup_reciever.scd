@@ -248,7 +248,7 @@ if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 
 		}
 	);
-		switch(~out[\Condition],
+		switch(~out['Room Condition'],
 		\Normal,{
 				~tau_write=File(format("%Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.csv",~panorm,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),"w");
 				~crpd_path=~panorm++"three_channels/";
