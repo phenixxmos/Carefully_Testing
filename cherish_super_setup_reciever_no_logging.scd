@@ -188,7 +188,7 @@ spath.do({|path,i|
 				~out.postln;
 
 
-	if(File.existsCaseSensitive(~r_p)==false,
+	if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 		{
 						var pos_data;
 						pos_data=File(format("%Positional_Data_machine.csv",~r_p),"w");
