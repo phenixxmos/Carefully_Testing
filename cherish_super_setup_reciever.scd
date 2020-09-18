@@ -150,7 +150,8 @@ spath.do({|path,i|
 			~out.add(\Version->format("%.%.%",val[2],val[3],val[4]));
 			~out.add(\ID->~d_id);
 			~out.add(\Firmware->~firmwarz);
-			~out.add(\Condition->room_condition.getID(val[7]););
+			~out.add('Room Condition'->room_condition.getID(val[7]););
+			~out.add('Test Configuration'->~expand.value(val[5],val[6]););
 
 			//location 1
 				~out.add(\s1l->Dictionary.with(*[\x->~expandq.value(val[13],val[12]),\y->~expandq.value(val[11],val[10]),\z->~expandq.value(val[9],val[8])]););
@@ -189,8 +190,8 @@ if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 						var pos_data;
 						pos_data=File(format("%Positional_Data_machine.csv",~r_p),"w");
 
-						pos_data.write(format("%,%,\n","Room_Condition",~out.at(\Condition)));
-						pos_data.write(format("%,%,\n","Program_Number",0));
+						pos_data.write(format("%,%,\n","Room_Condition",~out.at('Room Condition')));
+						pos_data.write(format("%,%,\n","Test_Condition",~out.at('Test Configuration')));
 
 						pos_data.write(format("%,%,\n","L1E",~out.at(\s1r).at('elavation angle')));
 						pos_data.write(format("%,%,\n","L1A",~out.at(\s1r).at('azimuth angle')));
@@ -235,6 +236,8 @@ if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 						pos_data.write(format("%,%,\n","MX",~mic_positon.at(\x)));
 						pos_data.write(format("%,%,\n","MY",~mic_positon.at(\y)));
 						pos_data.write(format("%,%,\n","MZ",~mic_positon.at(\z)));
+						pos_data.write(format("%,%,\n","ID",~out.at(\ID)));
+						pos_data.write(format("%,%,\n","Firmware",~out.at(\Firmware)));
 
 						pos_data.close;
 

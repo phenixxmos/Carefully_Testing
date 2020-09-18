@@ -4,14 +4,15 @@ m.numInputBusChannels=10;
 m.numBuffers=2000;
 
 s.doWhenBooted({
-var path,spath,l,test_config,major,minor,patch,dev_id,firmware_id,room_c,level,sender,receiver,speak1,speak2,speak3,speak4;
+var path,spath,l,test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,room_c,room_condition;
 
 path=PathName.new(File.getcwd++"/Playback_samples/");
 //path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 
-	# test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,firmware_id,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
-//	# test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,firmware_id,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
+	# test_config,major,minor,patch,speak1,speak2,speak3,speak4,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
+	// # test_config,major,minor,patch,speak1,speak2,speak3,speak4,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
+
 
 
 speak4.postln;
@@ -1443,12 +1444,12 @@ SynthDef.new(\send_m,{|amp=1,cal,out=0,send,bufnum=7,lp=0|
 ~sys=Array.fill(53, { arg i; nil });
 ~sys.put(0,240);
 ~sys.put(52,247);
-~sys.put(1,test_config);
+~sys.put(1,0);
 ~sys.put(2,major);
 ~sys.put(3,minor);
 ~sys.put(4,patch);
-~sys.put(5,dev_id);
-~sys.put(6,firmware_id);
+~sys.put(5,~lower.value(test_config);); //test config
+~sys.put(6,~upper.value(test_config););//test config
 ~sys.put(7,room_c);
 ~sys.put(8,~lowerq.value(speak1.at(\z)););
 ~sys.put(9,~upperq.value(speak1.at(\z)););

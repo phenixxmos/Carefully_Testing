@@ -151,7 +151,9 @@ spath.do({|path,i|
 			~out.add(\Version->format("%.%.%",val[2],val[3],val[4]));
 			~out.add(\ID->~d_id);
 			~out.add(\Firmware->~firmwarz);
-			~out.add(\Condition->room_condition.getID(val[7]););
+			~out.add('Room Condition'->room_condition.getID(val[7]););
+			~out.add('Test Configuration'->~expand.value(val[5],val[6]););
+
 
 			//location 1
 				~out.add(\s1l->Dictionary.with(*[\x->~expandq.value(val[13],val[12]),\y->~expandq.value(val[11],val[10]),\z->~expandq.value(val[9],val[8])]););
@@ -191,7 +193,7 @@ spath.do({|path,i|
 						pos_data=File(format("%Positional_Data_machine.csv",~r_p),"w");
 
 						pos_data.write(format("%,%,\n","Room_Condition",~out.at(\Condition)));
-						pos_data.write(format("%,%,\n","Program_Number",0));
+						pos_data.write(format("%,%,\n","Test_Condition",0));
 
 						pos_data.write(format("%,%,\n","L1E",~out.at(\s1r).at('elavation angle')));
 						pos_data.write(format("%,%,\n","L1A",~out.at(\s1r).at('azimuth angle')));
