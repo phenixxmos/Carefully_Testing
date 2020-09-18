@@ -141,7 +141,7 @@ spath.do({|path,i|
 	MIDIClient.init;
 
 	MIDIdef.sysex(\parse,{|val,src|
-		var prep,pos_data;
+		var prep;
 	switch(val[1],
 		0,{
 			var l_sum,room_condition,firmware,signal,weight;
@@ -187,10 +187,11 @@ spath.do({|path,i|
 
 				~out.postln;
 
-	pos_data=File(format("%Positional_Data_machine.csv",~r_p),"w");
 
 	if(File.existsCaseSensitive(~r_p)==false,
-		{pos_data=File(format("%Positional_Data_machine.csv",~r_p),"w");
+		{
+						var pos_data;
+						pos_data=File(format("%Positional_Data_machine.csv",~r_p),"w");
 						pos_data.write(format("%,%,\n","Room_Condition",~out.at(\Condition)));
 						pos_data.write(format("%,%,\n","Room_Condition",~out.at(\Condition)));
 						pos_data.close;
