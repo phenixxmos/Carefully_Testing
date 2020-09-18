@@ -150,7 +150,7 @@ spath.do({|path,i|
 
 			~out.add(\Version->format("%.%.%",val[2],val[3],val[4]));
 			~out.add(\ID->~d_id);
-			~out.add(\Firmware->~firmwarz);
+			~out.add(\Firmware->firmware.getID(~firmwarz););
 			~out.add('Room Condition'->room_condition.getID(val[7]););
 			~out.add('Test Configuration'->~expand.value(val[5],val[6]););
 
