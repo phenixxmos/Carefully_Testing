@@ -105,7 +105,7 @@ spath.do({|path,i|
 		{File.mkdir(~panorm++"raw/");"Normal/raw/ Created".postln;},
 		{"Normal/raw/ Directory already exist".postln;}
 	);
-	rec_path.postln;
+	~r_p.postln;
 ~upper={|x| x.rightShift(7).asInteger;}; //splits 14bit integer into upper 7
 ~lower={|x| x.asBinaryDigits(numDigits:7).convertDigits(base:2).asInteger;}; //splits 14bit integer into lower 7
 ~expand={|upper,lower| ((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2));}; //recombines up and low
