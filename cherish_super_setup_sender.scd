@@ -4,7 +4,7 @@ m.numInputBusChannels=10;
 m.numBuffers=2000;
 
 s.doWhenBooted({
-var path,spath,l,test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,room_c,room_condition;
+var path,spath,l,test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,room_c,room_condition,sender,receiver;
 
 path=PathName.new(File.getcwd++"/Playback_samples/");
 //path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
