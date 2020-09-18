@@ -290,16 +290,11 @@ prep=Routine({
 
 	MIDIdef.stop(\freer,{|src|
 		var stopper;
-		//Stop Recording
-		"this the stop".postln;
 		stopper=Routine({
-		~rec_csv=false;
 		~rec_raw.stopRecording;
 		~rec_crpd.stopRecording;
 		2.wait;
-		~nah.stop;
 		~passthrough.freeAll;
-		~tau_write.close;
 		});
 		stopper.play;
 		"Recording Stopped".postln;
