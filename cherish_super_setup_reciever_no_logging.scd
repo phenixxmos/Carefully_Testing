@@ -202,7 +202,7 @@ spath.do({|path,i|
 
 	//nickname 2
 
-	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_2,~nickn.at(~out.at(\s3p).at('signal num'));});
+	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_2,~nickn.at(~out.at(\s3p).at('signal num')));});
 
 	if(((~out.at(\s1p).at('signal num').sign==1)||(~out.at(\s2p).at('signal num').sign==1)||(~out.at(\s3p).at('signal num').sign==1))&&(~out.at(\s4p).at('signal num').sign==1), {~out.put(\nickname_2,~nickn.at(~out.at(\s4p).at('signal num'));});
 
