@@ -196,7 +196,7 @@ spath.do({|path,i|
 
 	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.at(~out.at(\s3p).at('signal num')));});
 
-	if(((~out.at(\s1p).at('signal num').sign==1).not)&&((~out.at(\s2p).at('signal num').sign==1)), {~out.put(\nickname_1,~nickn.at(~out.at(\s2p).at('signal num')));;});
+	if(((~out.at(\s1p).at('signal num').sign==1).not)&&((~out.at(\s2p).at('signal num').sign==1)), {~out.put(\nickname_1,~nickn.at(~out.at(\s2p).at('signal num')));});
 
 	if(~out.at(\s1p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.at(~out.at(\s1p).at('signal num')));});
 
