@@ -186,6 +186,25 @@ spath.do({|path,i|
 
 				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),~mic_positon),'cylinder Radius'->~cylinder_radius.value(~out.at(\s4l),~mic_positon)]););
 
+	//put nickname stuff here
+	~out.add(\nickname_1->\silence);
+	~out.add(\nickname_2->\silence);
+
+	//nickname 1
+
+	if(~out.at(\s4p).at('signal num').sign==1, {~out.put(\nickname_1,~out.at(\s4p).at(\signal));});
+
+	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_1,~out.at(\s3p).at(\signal));});
+
+	if((((~out.at(\s1p).at('signal num').sign==1).not)&&((~out.at(\s2p).at('signal num').sign==1)), {~out.put(\nickname_1,~out.at(\s2p).at(\signal));});
+
+	if(~out.at(\s1p).at('signal num').sign==1, {~out.put(\nickname_1,~out.at(\s1p).at(\signal));});
+
+	//nickname 2
+
+	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_2,~out.at(\s3p).at(\signal));});
+
+	if(((~out.at(\s1p).at('signal num').sign==1)||(~out.at(\s2p).at('signal num').sign==1)||(~out.at(\s3p).at('signal num').sign==1))&&(~out.at(\s4p).at('signal num').sign==1), {~out.put(\nickname_2,~out.at(\s4p).at(\signal));});
 
 	if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 		{
@@ -263,6 +282,10 @@ spath.do({|path,i|
 		});
 
 prep=Routine({
+			var c_count;
+
+			c_count=[~out.at(\s1p).at('signal num').sign,~out.at(\s2p).at('signal num').sign,~out.at(\s3p).at('signal num').sign
+				,~out.at(\s4p).at('signal num').sign].sum;
 			(~gap_size*5).wait;
 
 			~rec_raw.prepareForRecord(format("%Raw_Carefully-%_Firmware_%_L1_%_%%_L2_%_%%_L3_%_%%_L4_%_%%_v_%.wav",~raw_path,~out[\ID],~out[\Firmware],~out[\s1p][\signal],~out[\s1p][\level],~out[\s1p][\weight],~out[\s2p][\signal],~out[\s2p][\level],~out[\s2p][\weight],~out[\s3p][\signal],~out[\s3p][\level],~out[\s3p][\weight],~out[\s4p][\signal],~out[\s4p][\level],~out[\s4p][\weight],~out[\Version]),numChannels:8);
