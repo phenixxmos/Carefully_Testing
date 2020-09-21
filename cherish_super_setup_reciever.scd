@@ -188,7 +188,7 @@ spath.do({|path,i|
 	~out.add(\nickname_1->\silence);
 	~out.add(\nickname_2->\silence);
 
-	//nickname 1
+/*	//nickname 1
 
 	if(~out.at(\s4p).at('signal num').sign==1, {~out.put(\nickname_1,~out.at(\s4p).at(\signal));});
 
@@ -202,7 +202,7 @@ spath.do({|path,i|
 
 	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_2,~out.at(\s3p).at(\signal););});
 
-	if(((~out.at(\s1p).at('signal num').sign==1)||(~out.at(\s2p).at('signal num').sign==1)||(~out.at(\s3p).at('signal num').sign==1))&&(~out.at(\s4p).at('signal num').sign==1), {~out.put(\nickname_2,~out.at(\s4p).at(\signal));});
+	if(((~out.at(\s1p).at('signal num').sign==1)||(~out.at(\s2p).at('signal num').sign==1)||(~out.at(\s3p).at('signal num').sign==1))&&(~out.at(\s4p).at('signal num').sign==1), {~out.put(\nickname_2,~out.at(\s4p).at(\signal));});*/
 
 
 if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
