@@ -190,19 +190,19 @@ spath.do({|path,i|
 
 	//nickname 1
 
-	if(~out.at(\s4p).at('signal num').sign==1, {~nickn.at(~out.put(\nickname_1,~out.at(\s4p).at('signal num')));});
+	if(~out.at(\s4p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.at(~out.at(\s4p).at('signal num')));});
 
-	if(~out.at(\s3p).at('signal num').sign==1, {~nickn.at(~out.put(\nickname_1,~out.at(\s3p).at('signal num')));});
+	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.at(~out.at(\s3p).at('signal num')));});
 
-	if(((~out.at(\s1p).at('signal num').sign==1).not)&&((~out.at(\s2p).at('signal num').sign==1)), {~nickn.at(~out.put(\nickname_1,~out.at(\s2p).at('signal num')));});
+	if(((~out.at(\s1p).at('signal num').sign==1).not)&&((~out.at(\s2p).at('signal num').sign==1)), {~out.put(\nickname_1,~nickn.at(~out.at(\s2p).at('signal num')));;});
 
-	if(~out.at(\s1p).at('signal num').sign==1, {~nickn.at(~out.put(\nickname_1,~out.at(\s1p).at('signal num')));});
+	if(~out.at(\s1p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.at(~out.at(\s1p).at('signal num')));});
 
 	//nickname 2
 
-	if(~out.at(\s3p).at('signal num').sign==1, {~nickn.getID(~out.put(\nickname_2,~out.at(\s3p).at('signal num')));});
+	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_2,~nickn.at(~out.at(\s3p).at('signal num'));});
 
-	if(((~out.at(\s1p).at('signal num').sign==1)||(~out.at(\s2p).at('signal num').sign==1)||(~out.at(\s3p).at('signal num').sign==1))&&(~out.at(\s4p).at('signal num').sign==1), {~nickn.at(~out.put(\nickname_1,~out.at(\s4p).at('signal num')));});
+	if(((~out.at(\s1p).at('signal num').sign==1)||(~out.at(\s2p).at('signal num').sign==1)||(~out.at(\s3p).at('signal num').sign==1))&&(~out.at(\s4p).at('signal num').sign==1), {~out.put(\nickname_2,~nickn.at(~out.at(\s4p).at('signal num'));});
 
 if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 		{
