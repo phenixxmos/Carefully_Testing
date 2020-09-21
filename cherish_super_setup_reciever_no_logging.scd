@@ -187,8 +187,8 @@ spath.do({|path,i|
 				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),~mic_positon),'cylinder Radius'->~cylinder_radius.value(~out.at(\s4l),~mic_positon)]););
 
 	//put nickname stuff here
-	~out.add(\nickname_1->\silence);
-	~out.add(\nickname_2->\silence);
+	~out.add(\nickname_1->'silence@xxxxxxxxxxx');
+	~out.add(\nickname_2->'silence@xxxxxxxxxxx');
 
 	//nickname 1
 
