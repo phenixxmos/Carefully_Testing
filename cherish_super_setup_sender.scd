@@ -42,7 +42,7 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
+		playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')]),
 			Dictionary.with(*[\sig->0,\level->0,\weight->~weight.at('dBeq(A)')]),
 			Dictionary.with(*[\sig->0,\level->0,\weight->~weight.at('dBeq(A)')]),
 			Dictionary.with(*[\sig->0,\level->0,\weight->~weight.at('dBeq(A)')])];
@@ -71,13 +71,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 
@@ -95,10 +95,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -124,13 +124,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -147,10 +147,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -177,13 +177,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -200,10 +200,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -229,13 +229,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -252,10 +252,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -282,13 +282,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -305,10 +305,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('024_Bathtub Fill'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -334,13 +334,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -357,10 +357,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -386,13 +386,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -409,10 +409,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -439,13 +439,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -462,10 +462,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -492,13 +492,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -515,10 +515,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -545,13 +545,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -569,10 +569,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -599,13 +599,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -622,10 +622,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -652,13 +652,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -675,10 +675,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -705,13 +705,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -728,10 +728,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('038_Microwave'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -758,13 +758,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -782,10 +782,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -811,13 +811,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -835,10 +835,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -864,13 +864,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -887,10 +887,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -916,13 +916,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -940,10 +940,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('07_Door Open and Slam'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -969,13 +969,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -994,10 +994,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -1023,13 +1023,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -1047,10 +1047,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -1076,13 +1076,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -1100,10 +1100,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -1129,13 +1129,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 
@@ -1153,10 +1153,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -1182,13 +1182,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -1205,10 +1205,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -1234,13 +1234,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -1258,10 +1258,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -1287,13 +1287,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -1311,10 +1311,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -1340,13 +1340,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 
@@ -1364,10 +1364,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->94,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->94,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('White_Noise'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
 		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
@@ -1393,13 +1393,13 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-94).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(0).at(\sig)>0,{synth.put(0,Synth(\playbuf_m,[\amp,(playlist.at(0).at(\level)-80).dbamp,\cal,~noi_cal.at(0),\out,0,\bufnum,~samp.at((playlist.at(0).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-94).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(1).at(\sig)>0,{synth.put(1,Synth(\playbuf_m,[\amp,(playlist.at(1).at(\level)-80).dbamp,\cal,~noi_cal.at(1),\out,1,\bufnum,~samp.at((playlist.at(1).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-94).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(2).at(\sig)>0,{synth.put(2,Synth(\playbuf_m,[\amp,(playlist.at(2).at(\level)-80).dbamp,\cal,~noi_cal.at(2),\out,2,\bufnum,~samp.at((playlist.at(2).at(\sig)-1)),\lp,1]););},{});
 
-		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-94).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
+		if(playlist.at(3).at(\sig)>0,{synth.put(3,Synth(\playbuf_m,[\amp,(playlist.at(3).at(\level)-80).dbamp,\cal,~noi_cal.at(3),\out,3,\bufnum,~samp.at((playlist.at(3).at(\sig)-1)),\lp,1]););},{});
 	(120+~gap_size).wait;
 	g.stop;
 	if(playlist.at(0).at(\sig)>0,{synth.at(0).free;},{});
@@ -1504,7 +1504,7 @@ s.boot;
 
 //
 //
-// ~playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->94,\weight->~weight.at('dBeq(A)')]),
+// ~playlist=[Dictionary.with(*[\sig->~signal.at('Person_3_48kHz_chopped'),\level->80,\weight->~weight.at('dBeq(A)')]),
 // 	Dictionary.with(*[\sig->0,\level->0,\weight->~weight.at('dBeq(A)')]),
 // 	Dictionary.with(*[\sig->0,\level->0,\weight->~weight.at('dBeq(A)')]),
 // Dictionary.with(*[\sig->0,\level->0,\weight->~weight.at('dBeq(A)')])];
