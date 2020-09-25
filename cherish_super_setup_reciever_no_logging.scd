@@ -5,11 +5,10 @@ m.numBuffers=2000;
 
 s.doWhenBooted({
 var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware;
-	//path=PathName.new(File.getcwd++"/Playback_samples/");
-	path=PathName.new("/home/pi/Carefully_Testing/Normalized");
-	// path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
-	# rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"/reciever_config.scd").value();
-	// # rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
+	path=PathName.new(File.getcwd++"/Playback_samples/");
+	//path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
+	# rec_path,gap,m_in,m_pos,id,firmware=this.compileFile(File.getcwd++"/reciever_config.scd").value();
+	//# rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
 
 ~r_p=rec_path;
 ~gap_size=gap;
@@ -31,17 +30,13 @@ spath.do({|path,i|
 		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
 });
 ~signal.put(\silence,0);
-/*~nickn.put('tub_fill@xxxxxxxxxx',~signal.at('024_Bathtub Fill'));
+~nickn.put('tub_fill@xxxxxxxxxx',~signal.at('024_Bathtub Fill'));
 ~nickn.put('tub_drain@xxxxxxxxx',~signal.at('025_Bathtub Drain'));
 ~nickn.put('door_slam@xxxxxxxxx',~signal.at('07_Door Open and Slam'));
 ~nickn.put('microwave@xxxxxxxxx',~signal.at('038_Microwave'));
 ~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
 ~nickn.put('white_noise@xxxxxxx',~signal.at('White_Noise'));
-~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('Person_3_48kHz_chopped'));*/
-~nickn.put('AC@xxxxxxxxxxxxxxxx',~signal.at('Air_Conditioner'));
-~nickn.put('TV@xxxxxxxxxxxxxxxx',~signal.at('Radio Sounds'));
-~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('session_Person 3 (male)_03'));
-~nickn.put('kitchen@xxxxxxxxxxx',~signal.at('Kitchen Sounds'));
+~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('Person_3_48kHz_chopped'));
 // ~playback_list=File(format("%Playback_list.csv","/Users/phenix/Documents/Cherish/V2_testing/"),"w");
 ~playback_list=File(format("%Playback_list.csv",rec_path),"w");
 ~playback_list.write("Number,nick_name,fullname,\n");
@@ -274,30 +269,14 @@ spath.do({|path,i|
 	);
 		switch(~out['Room Condition'],
 		\Normal,{
-				var code,weight;
-				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
-				code=(~out.at('Test Configuration').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s1p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s1p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s2p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s2p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s3p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s3p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s4p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s4p).at('signal num').asInteger.asHexString(width:4));
-
-				~tau_write=File(format("%%-%-r-%.csv",~panorm,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~panorm++"three_channels/";
 				~raw_path=~panorms++"raw/";
-
 			},
 		\Closed,{
-				var code,weight;
-				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
-				code=(~out.at('Test Configuration').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s1p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s1p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s2p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s2p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s3p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s3p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s4p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s4p).at('signal num').asInteger.asHexString(width:4));
-
-				~tau_write=File(format("%%-%-r-%.csv",~paclsd,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~paclsd++"three_channels/";
 				~raw_path=~paclsd++"raw/";
 			},
 		\Open,{
-				var code,weight;
-				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
-				code=(~out.at('Test Configuration').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s1p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s1p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s2p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s2p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s3p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s3p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s4p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s4p).at('signal num').asInteger.asHexString(width:4));
-
-				~tau_write=File(format("%%-%-r-%.csv",~papn,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~papn++"three_channels/";
 				~raw_path=~papn++"raw/";
 		});
@@ -330,38 +309,18 @@ prep=Routine({
 		~rec_raw.record(bus:~raw_bus,node:~passthrough);
 		~rec_crpd.record(bus:~crpd_bus,node:~passthrough);
 		});
-	~nah=Routine({
-			var l,s,out;
-	~tau_write.write("Seconds,Reported Azimuth (°),Reported Elevation(°),\n");
-			while({~rec_csv},{
-				l=Pipe.new("cd /home/pi/november-2018/app_device_control/bin && ./vsctrl doa_peak get","r");
-				l.getLine;
-				l.getLine;
-				s=l.getLine.split($ );
-				l.close;
-		out=format("%,%,%,\n",thisThread.seconds,s.at(4),s.at(10));
-				~tau_write.write(out);
-				1.wait;
-			});
 
-		});
-			"Recording Started".postln;
+		"Recording Started".postln;
 		player.play;
-		~nah.play;
 	});
 
 	MIDIdef.stop(\freer,{|src|
 		var stopper;
-		//Stop Recording
-		"this the stop".postln;
 		stopper=Routine({
-		~rec_csv=false;
 		~rec_raw.stopRecording;
 		~rec_crpd.stopRecording;
 		2.wait;
-		~nah.stop;
 		~passthrough.freeAll;
-		~tau_write.close;
 		});
 		stopper.play;
 		"Recording Stopped".postln;
