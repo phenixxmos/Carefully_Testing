@@ -30,13 +30,17 @@ spath.do({|path,i|
 		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
 });
 ~signal.put(\silence,0);
-~nickn.put('tub_fill@xxxxxxxxxx',~signal.at('024_Bathtub Fill'));
+/*~nickn.put('tub_fill@xxxxxxxxxx',~signal.at('024_Bathtub Fill'));
 ~nickn.put('tub_drain@xxxxxxxxx',~signal.at('025_Bathtub Drain'));
 ~nickn.put('door_slam@xxxxxxxxx',~signal.at('07_Door Open and Slam'));
 ~nickn.put('microwave@xxxxxxxxx',~signal.at('038_Microwave'));
 ~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
 ~nickn.put('white_noise@xxxxxxx',~signal.at('White_Noise'));
-~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('Person_3_48kHz_chopped'));
+~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('Person_3_48kHz_chopped'));*/
+~nickn.put('AC@xxxxxxxxxxxxxxxx',~signal.at('Air_Conditioner'));
+~nickn.put('TV@xxxxxxxxxxxxxxxx',~signal.at('Radio Sounds'));
+~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('session_Person 3 (male)_03'));
+~nickn.put('kitchen@xxxxxxxxxxx',~signal.at('Kitchen Sounds'));
 // ~playback_list=File(format("%Playback_list.csv","/Users/phenix/Documents/Cherish/V2_testing/"),"w");
 ~playback_list=File(format("%Playback_list.csv",rec_path),"w");
 ~playback_list.write("Number,nick_name,fullname,\n");
