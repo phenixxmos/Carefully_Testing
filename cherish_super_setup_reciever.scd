@@ -5,10 +5,11 @@ m.numBuffers=2000;
 
 s.doWhenBooted({
 var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware;
-	path=PathName.new(File.getcwd++"/Playback_samples/");
+	//path=PathName.new(File.getcwd++"/Playback_samples/");
+	path=PathName.new(File.getcwd++"/Normalized/");
 	// path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
-	# rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"/reciever_config.scd").value();
-	// # rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
+	//# rec_path,gap,m_in,m_pos=this.compileFile(File.getcwd++"/reciever_config.scd").value();
+	 # rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
 
 ~r_p=rec_path;
 ~gap_size=gap;
@@ -59,7 +60,7 @@ spath.do({|path,i|
 ~rec_raw.recHeaderFormat="WAV";
 ~rec_crpd.recSampleFormat="int16";
 ~rec_crpd.recHeaderFormat="WAV";
-~out=Dictionary.new(n=22);
+~out=Dictionary.new(n=18);
 ~papn=rec_path++"Open/";
 ~paclsd=rec_path++"Closed/";
 ~panorm=rec_path++"Normal/";
@@ -108,6 +109,7 @@ spath.do({|path,i|
 		{File.mkdir(~panorm++"raw/");"Normal/raw/ Created".postln;},
 		{"Normal/raw/ Directory already exist".postln;}
 	);
+	~r_p.postln;
 ~upper={|x| x.rightShift(7).asInteger;}; //splits 14bit integer into upper 7
 ~lower={|x| x.asBinaryDigits(numDigits:7).convertDigits(base:2).asInteger;}; //splits 14bit integer into lower 7
 ~expand={|upper,lower| ((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2));}; //recombines up and low
@@ -143,7 +145,7 @@ spath.do({|path,i|
 	MIDIClient.init;
 
 	MIDIdef.sysex(\parse,{|val,src|
-		var prep,pos_data;
+		var prep;
 	switch(val[1],
 		0,{
 			var l_sum,room_condition,firmware,signal,weight;
@@ -156,6 +158,7 @@ spath.do({|path,i|
 			~out.add(\Firmware->firmware.getID(~firmwarz););
 			~out.add('Room Condition'->room_condition.getID(val[7]););
 			~out.add('Test Configuration'->~expand.value(val[5],val[6]););
+
 
 			//location 1
 				~out.add(\s1l->Dictionary.with(*[\x->~expandq.value(val[13],val[12]),\y->~expandq.value(val[11],val[10]),\z->~expandq.value(val[9],val[8])]););
@@ -189,28 +192,26 @@ spath.do({|path,i|
 				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),~mic_positon),'cylinder Radius'->~cylinder_radius.value(~out.at(\s4l),~mic_positon)]););
 
 	//put nickname stuff here
-	~out.add(\nickname_1->'silence@xxxxxxxxxxx';
+	~out.add(\nickname_1->'silence@xxxxxxxxxxx');
 	~out.add(\nickname_2->'silence@xxxxxxxxxxx');
 
 	//nickname 1
 
-		//nickname 1
+	if(~out.at(\s4p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.getID(~out.at(\s4p).at('signal num')));});
 
-	if(~out.at(\s4p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.at(~out.getID(\s4p).at('signal num')));});
-
-	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.at(~out.getID(\s3p).at('signal num')));});
+	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.getID(~out.at(\s3p).at('signal num')));});
 
 	if(((~out.at(\s1p).at('signal num').sign==1).not)&&((~out.at(\s2p).at('signal num').sign==1)), {~out.put(\nickname_1,~nickn.getID(~out.at(\s2p).at('signal num')));});
 
-	if(~out.at(\s1p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.at(~out.at(\s1p).getID('signal num')));});
+	if(~out.at(\s1p).at('signal num').sign==1, {~out.put(\nickname_1,~nickn.getID(~out.at(\s1p).at('signal num')));});
 
 	//nickname 2
 
-	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_2,~nickn.at(~out.at(\s3p).at('signal num')));});
+	if(~out.at(\s3p).at('signal num').sign==1, {~out.put(\nickname_2,~nickn.getID(~out.at(\s3p).at('signal num')));});
 
 				if(((~out.at(\s1p).at('signal num').sign==1)||(~out.at(\s2p).at('signal num').sign==1)||(~out.at(\s3p).at('signal num').sign==1))&&(~out.at(\s4p).at('signal num').sign==1), {~out.put(\nickname_2,~nickn.getID(~out.at(\s4p).at('signal num')));});
 
-if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
+	if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 		{
 						var pos_data;
 						pos_data=File(format("%Positional_Data_machine.csv",~r_p),"w");
@@ -265,11 +266,9 @@ if(File.existsCaseSensitive(format("%Positional_Data_machine.csv",~r_p))==false,
 						pos_data.write(format("%,%,\n","Firmware",~out.at(\Firmware)));
 
 						pos_data.close;
-
 					},
 		{"Positional_Data_machine.csv  file already exist".postln;}
 	);
-
 
 		}
 	);
