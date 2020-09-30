@@ -6,17 +6,16 @@ m.numBuffers=2000;
 s.doWhenBooted({
 var path,spath,l,test_config,major,minor,patch,dev_id,speak1,speak2,speak3,speak4,room_c,room_condition,sender,receiver;
 
-//path=PathName.new(File.getcwd++"/Playback_regain/");
+path=PathName.new(File.getcwd++"/Playback_regain/");
 //path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
-path=PathName.new("/Users/phenix/Downloads/0.1.x/Quadrant/");
 
-	//# test_config,major,minor,patch,speak1,speak2,speak3,speak4,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
-	# test_config,major,minor,patch,speak1,speak2,speak3,speak4,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
-
+	# test_config,major,minor,patch,speak1,speak2,speak3,speak4,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
+	// # test_config,major,minor,patch,speak1,speak2,speak3,speak4,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
 
 
 
+speak4.postln;
 ~gap_size=0.05;
 
 
@@ -31,8 +30,6 @@ spath.do({|path,i|
 	~samp.add(Buffer.read(s,path));
 });
 ~signal.put(\silence,0);
-
-
 
 MIDIClient.init;
 g=MIDIOut.new(0);
@@ -1412,8 +1409,9 @@ g.latency=0;
 	5.wait;
 	});
 
-~quad=Routine({
+	~quad=Routine({
 	var synth,second,nframe,rate,buffer_num,sys_out,playlist,voice,tv,ac,kitchen;
+
 	voice=Pmono(\playbuf_m,
 		\out,0,
 		\cal,0.125,
@@ -1421,7 +1419,7 @@ g.latency=0;
 		\amp,Pseq([1,0,1,0,1,0,1,0],1),
 		\dur,15,);
 
-//TV
+	//TV
 	tv=Pmono(\playbuf_m,
 		\out,1,
 		\cal,0.125,
@@ -1429,25 +1427,78 @@ g.latency=0;
 		\amp,Pseq([0,1],1),
 		\dur,60,);
 
-//AC
-ac=Pmono(\playbuf_m,
+	//AC
+	ac=Pmono(\playbuf_m,
 	\out,2,
 	\cal,0.125,
 	\bufnum,~samp.at(0),
 	\amp,Pseq([0,1,0],1),
 	\dur,Pseq([30,60,30],1),);
 
-//kitchen
-kitchen=Pmono(\playbuf_m,
+	//kitchen
+	kitchen=Pmono(\playbuf_m,
 	\out,3,
 	\cal,0.125,
 	\bufnum,~samp.at(1),
 	\amp,Pseq([0,1,0,0,1,0,0,0],1),
 	\dur,15,);
-~signal.at('Kitchen Sounds');
+
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-	playlist=[Dictionary.with(*[\sig->~signal.at('session_Person 3 (male)_03'),\level->80,\weight->~weight.at('dBeq(A)')]),
+		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
+
+		sys_out.put(14,~lower.value(playlist.at(0).at(\sig)););
+		sys_out.put(15,~upper.value(playlist.at(0).at(\sig)););
+		sys_out.put(16,~lowerq.value(playlist.at(0).at(\level)););
+		sys_out.put(17,~upperq.value(playlist.at(0).at(\level)););
+		sys_out.put(18,playlist.at(0).at(\weight););
+		sys_out.put(25,~lower.value(playlist.at(1).at(\sig)););
+		sys_out.put(26,~upper.value(playlist.at(1).at(\sig)););
+		sys_out.put(27,~lowerq.value(playlist.at(1).at(\level)););
+		sys_out.put(28,~upperq.value(playlist.at(1).at(\level)););
+		sys_out.put(29,playlist.at(1).at(\weight););
+		sys_out.put(36,~lower.value(playlist.at(2).at(\sig)););
+		sys_out.put(37,~upper.value(playlist.at(2).at(\sig)););
+		sys_out.put(38,~lowerq.value(playlist.at(2).at(\level)););
+		sys_out.put(39,~upperq.value(playlist.at(2).at(\level)););
+		sys_out.put(40,playlist.at(2).at(\weight););
+		sys_out.put(47,~lower.value(playlist.at(3).at(\sig)););
+		sys_out.put(48,~upper.value(playlist.at(3).at(\sig)););
+		sys_out.put(49,~lowerq.value(playlist.at(3).at(\level)););
+		sys_out.put(50,~upperq.value(playlist.at(3).at(\level)););
+		sys_out.put(51,playlist.at(3).at(\weight););
+
+	sys_out=sys_out.as(Int8Array);
+	g.sysex(sys_out);
+	2.wait;
+	g.start;
+
+	(120+~gap_size).wait;
+	g.stop;
+	Ppar([voice,tv,ac,kitchen]).play;
+	5.wait;
+	});
+
+
+~quad=Routine({
+	var synth,second,nframe,rate,buffer_num,sys_out,playlist,voice,tv,ac,kitchen;
+	~voice=Pmono(\playbuf_m,\out,0,\cal,0.125,\bufnum,~samp.at(3),\amp,Pseq([1,0,1,0,1,0,1,0],1),\dur,15,);
+
+//TV
+	~tv=Pmono(\playbuf_m,\out,1,\cal,0.125,\bufnum,~samp.at(2),\amp,Pseq([0,1],1),\dur,60,);
+
+//AC
+~ac=Pmono(\playbuf_m,\out,2,\cal,0.125,\bufnum,~samp.at(0),\amp,Pseq([0,1,0],1),\dur,Pseq([30,60,30],1),);
+
+//kitchen
+~kitchen=Pmono(\playbuf_m,\out,3,\cal,0.125,\bufnum,~samp.at(1),\amp,Pseq([0,1,0,0,1,0,0,0],1),\dur,15,);
+
+	sys_out=~sys;
+		//playlist=[s1,s2,s3,s4]
+	playlist=[Dictionary.with(*[\sig->~signal.at('Air_Conditioner'),\level->80,\weight->~weight.at('dBeq(A)')]),
 			Dictionary.with(*[\sig->~signal.at('Radio Sounds'),\level->80,\weight->~weight.at('dBeq(A)')]),
 			Dictionary.with(*[\sig->~signal.at('Air_Conditioner'),\level->80,\weight->~weight.at('dBeq(A)')]),
 			Dictionary.with(*[\sig->~signal.at('Kitchen Sounds'),\level->80,\weight->~weight.at('dBeq(A)')])];
@@ -1476,13 +1527,12 @@ kitchen=Pmono(\playbuf_m,
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-	Ppar([voice,tv,ac,kitchen]).play;
+	Ppar([~voice,~tv,~ac,~kitchen]).play;
 	(120+~gap_size).wait;
 	g.stop;
 
 	5.wait;
-	});
-
+});
 
 ~fin=Routine({1.wait;"The Recordings are done".postln;});
 
@@ -1561,16 +1611,12 @@ SynthDef.new(\send_m,{|amp=1,cal,out=0,send,bufnum=7,lp=0|
         l.getLine;
 
 	"Fully Loaded".postln;
-
-
 });
 
 s.boot;
-//
-~samp.at(0);
 ~noi_cal=[1,1,1,1];
 
-~samp.at(1);
+
 
 ~test_player=~bath_drain_1++~bath_drain_2++~bath_drain_3++~bath_drain_4++~bath_fill_1++~bath_fill_2++~bath_fill_3++~bath_fill_3++~microwave_1++~microwave_2++~microwave_3++~microwave_4++~door_slam_1++~door_slam_2++~door_slam_3++~door_slam_4++~voice_1++~voice_2++~voice_3++~voice_4++~noise_1++~noise_2++~noise_3++~noise_4++~fin;
 
@@ -1579,8 +1625,6 @@ s.boot;
 
 ~vox=~voice_1++~voice_2++~voice_3++~voice_4++~fin;
 
-
-~quad.play;
 
 //
 //
