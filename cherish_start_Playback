@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-jackd -d alsa -d hw:x20 -r 48000 -p 1024 -n 2&
+jackd -d alsa -d hw:K6 -r 48000 -p 1024 -n 2&
 sleep 2
 sclang
 #a2jmidid -e

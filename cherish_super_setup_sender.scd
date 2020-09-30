@@ -1568,7 +1568,7 @@ SynthDef.new(\send_m,{|amp=1,cal,out=0,send,bufnum=7,lp=0|
 ~sys=Array.fill(53, { arg i; nil });
 ~sys.put(0,240);
 ~sys.put(52,247);
-~sys.put(1,0);
+~sys.put(1,125);
 ~sys.put(2,major);
 ~sys.put(3,minor);
 ~sys.put(4,patch);
@@ -1647,5 +1647,6 @@ var noise_calibration;noise_calibration=(-9.2);
 ~noi_cal=noise_calibration.dbamp;
 
 ~ncl=Synth(\playbuf_m,[\amp,1,\cal,~noi_cal,\out,2,\bufnum,~cal_samp.at(0).bufnum,\lp,1]);
-
+this is an excellent sysex guide
+https://www.recordingblogs.com/wiki/midi-system-exclusive-message
 **/
