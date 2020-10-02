@@ -281,7 +281,7 @@ weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'-
 
 				~tau_write=File(format("%%-%-r-%.csv",~panorm,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~panorm++"three_channels/";
-				~raw_path=~panorms++"raw/";
+				~raw_path=~panorm++"raw/";
 
 			},
 		\Closed,{

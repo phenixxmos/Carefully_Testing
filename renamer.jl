@@ -1,6 +1,6 @@
 
 using ReadWriteDlm2
-path="/Users/phenix/Desktop/localization_wave_2_lo/"
+path="/Users/phenix/Documents/Cherish/Location_Recordings/localization_wave_2_lo_norm/"
 #Open
 shift=3
 #shift=0
