@@ -1,6 +1,6 @@
 
 using ReadWriteDlm2
-path="/Users/phenix/Documents/Cherish/Location_Recordings/30.55_wave_2/"
+path="/Users/phenix/Desktop/localization_wave_2_lo/"
 #Open
 shift=3
 #shift=0
@@ -12,10 +12,11 @@ for (root, dirs, files) in walkdir(path*"Open/raw")
     h=["Old_Name"]
     for file in files
         if file[(end-3):end]==".wav"
+            println(file[44:(end-4)])
             println(joinpath(root, file)) # path to files
-            println(joinpath(root, "renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
-            cp(joinpath(root, file),joinpath(root, "renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav"))
-            g=vcat(g,[file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]])
+            println(joinpath(root, "renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
+            cp(joinpath(root, file),joinpath(root, "renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav"))
+            g=vcat(g,[file[1:42]*string(hash(hex2bytes(file[44:(end-4)])))[(4+shift):(6+shift)]])
             h=vcat(h,file[1:(end-4)])
         else
 
@@ -35,9 +36,9 @@ for (root, dirs, files) in walkdir(path*"Open/three_channels")
     for file in files
         if file[(end-3):end]==".wav"
             println(joinpath(root, file)) # path to files
-            println(joinpath(root, "renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
-            cp(file,"renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")
-            g=vcat(g,[file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]])
+            println(joinpath(root, "renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
+            cp(file,"renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")
+            g=vcat(g,[file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]])
             h=vcat(h,file[1:(end-4)])
         else
 
@@ -58,9 +59,9 @@ for (root, dirs, files) in walkdir(path*"Closed/raw")
     for file in files
         if file[(end-3):end]==".wav"
             println(joinpath(root, file)) # path to files
-            println(joinpath(root, "renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
-            cp(file,"renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")
-            g=vcat(g,[file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]])
+            println(joinpath(root, "renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
+            cp(file,"renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")
+            g=vcat(g,[file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]])
             h=vcat(h,file[1:(end-4)])
         else
 
@@ -80,9 +81,9 @@ for (root, dirs, files) in walkdir(path*"Closed/three_channels")
     for file in files
         if file[(end-3):end]==".wav"
             println(joinpath(root, file)) # path to files
-            println(joinpath(root, "renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
-            cp(file,"renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")
-            g=vcat(g,[file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]])
+            println(joinpath(root, "renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
+            cp(file,"renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")
+            g=vcat(g,[file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]])
             h=vcat(h,file[1:(end-4)])
         else
 
@@ -104,9 +105,9 @@ for (root, dirs, files) in walkdir(path*"Normal/raw")
     for file in files
         if file[(end-3):end]==".wav"
             println(joinpath(root, file)) # path to files
-            println(joinpath(root, "renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
-            cp(file,"renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")
-            g=vcat(g,[file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]])
+            println(joinpath(root, "renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
+            cp(file,"renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")
+            g=vcat(g,[file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]])
             h=vcat(h,file[1:(end-4)])
         else
 
@@ -126,9 +127,9 @@ for (root, dirs, files) in walkdir(path*"Normal/three_channels")
     for file in files
         if file[(end-3):end]==".wav"
             println(joinpath(root, file)) # path to files
-            println(joinpath(root, "renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
-            cp(file,"renamed/"*file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]*".wav")
-            g=vcat(g,[file[1:42]*string(hash(parse.(BigInt,file[44:(end-4)])))[(4+shift):(6+shift)]])
+            println(joinpath(root, "renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")) # path to files
+            cp(file,"renamed/"*file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]*".wav")
+            g=vcat(g,[file[1:42]*string(hash(hex2bytes(file[45:(end-4)])))[(4+shift):(6+shift)]])
             h=vcat(h,file[1:(end-4)])
         else
 
