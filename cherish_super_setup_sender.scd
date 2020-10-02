@@ -11,8 +11,8 @@ path=PathName.new(File.getcwd++"/Playback_regain/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_regain/");
 
-//# gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
-#gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
+# gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
+//#gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
 
 
 
