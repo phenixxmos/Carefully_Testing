@@ -4,11 +4,11 @@ m.numInputBusChannels=8;
 m.numBuffers=2000;
 
 s.doWhenBooted({
-var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware;
-	path=PathName.new(File.getcwd++"/Playback_samples/");
-	//path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
-	# rec_path,gap,m_in,m_pos,id,firmware=this.compileFile(File.getcwd++"/reciever_config.scd").value();
-	//# rec_path,gap,m_in,m_pos=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
+var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware,gitcommit;
+	path=PathName.new(File.getcwd++"/Playback_regain/");
+	//path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_regain/");
+	# rec_path,gap,m_in,m_pos,id,firmware,gitcommit=this.compileFile(File.getcwd++"/reciever_config.scd").value();
+	//# rec_path,gap,m_in,m_pos,id,firmware,gitcommit=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
 
 ~r_p=rec_path;
 ~gap_size=gap;
@@ -37,7 +37,13 @@ spath.do({|path,i|
 ~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
 ~nickn.put('white_noise@xxxxxxx',~signal.at('White_Noise'));
 ~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('Person_3_48kHz_chopped'));
-// ~playback_list=File(format("%Playback_list.csv","/Users/phenix/Documents/Cherish/V2_testing/"),"w");
+/*
+~nickn.put('AC@xxxxxxxxxxxxxxxx',~signal.at('Air_Conditioner'));
+~nickn.put('TV@xxxxxxxxxxxxxxxx',~signal.at('Radio Sounds'));
+~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('session_Person 3 (male)_03'));
+~nickn.put('kitchen@xxxxxxxxxxx',~signal.at('Kitchen Sounds'));
+*/
+
 ~playback_list=File(format("%Playback_list.csv",rec_path),"w");
 ~playback_list.write("Number,nick_name,fullname,\n");
 ~signal.do({|path,i|
@@ -55,7 +61,7 @@ spath.do({|path,i|
 ~rec_raw.recHeaderFormat="WAV";
 ~rec_crpd.recSampleFormat="int16";
 ~rec_crpd.recHeaderFormat="WAV";
-~out=Dictionary.new(n=18);
+~out=Dictionary.new(n=30);
 ~papn=rec_path++"Open/";
 ~paclsd=rec_path++"Closed/";
 ~panorm=rec_path++"Normal/";
@@ -108,16 +114,16 @@ spath.do({|path,i|
 ~upper={|x| x.rightShift(7).asInteger;}; //splits 14bit integer into upper 7
 ~lower={|x| x.asBinaryDigits(numDigits:7).convertDigits(base:2).asInteger;}; //splits 14bit integer into lower 7
 ~expand={|upper,lower| ((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2));}; //recombines up and low
-
-~upperq={|x| (x*(2**4)).round(1).asInteger.rightShift(7);};//splits 14bit integer Q format 10.4 into upper 7
-~lowerq={|x| (x*(2**4)).round(1).asInteger.asBinaryDigits(numDigits:7).convertDigits(base:2);};//splits 14bit integer Q format 10.4 into lower 7
-~expandq={|upper,lower| (((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2))/(2**4)).round(0.01);};//recombines q format
+~upperq={|x| (x*(2**6)).round(1).asInteger.rightShift(7);};//splits 14bit integer Q format 10.4 into upper 7
+~lowerq={|x| (x*(2**6)).round(1).asInteger.asBinaryDigits(numDigits:7).convertDigits(base:2);};//splits 14bit integer Q format 10.4 into lower 7
+~expandq={|upper,lower| (((upper.asBinaryDigits(numDigits:7)++lower.asBinaryDigits(numDigits:7)).convertDigits(base:2))/(2**6)).round(0.01);};//recombines q format
 ~rad2degree={|x| switch(sign(x),1.0,{x*(180/pi);},(-1.0),{360+(x*(180/pi));},0.0,{0.0});}; //radian to degree converter
 ~sphere_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y)),(speak.at(\z)-mic.at(\z))].squared.sum.sqrt;}; //computes Spherical radius
 ~cylinder_radius={|speak,mic| [(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;};//computes Cylindrical radius
 ~elevation={|speak,mic| (speak.at(\z)-mic.at(\z));}; //finds the elavtion relative to the microphone board
-	~elevation_θ={|speak,mic| ~rad2degree.value(atan2((speak.at(\z)-mic.at(\z)),([(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;)));}; //finds the elavtion angle
-	~azimuth_φ={|speak,mic| ~rad2degree.value(atan2((speak.at(\y)-mic.at(\y)),(speak.at(\x)-mic.at(\x))));};  //finds Azimuth angle
+~elevation_θ={|speak,mic| ~rad2degree.value(atan2((speak.at(\z)-mic.at(\z)),([(speak.at(\x)-mic.at(\x)),(speak.at(\y)-mic.at(\y))].squared.sum.sqrt;)));}; //finds the elavtion angle
+~azimuth_φ={|speak,mic| ~rad2degree.value(atan2((speak.at(\y)-mic.at(\y)),(speak.at(\x)-mic.at(\x))));};  //finds Azimuth angle
+~bounder={|x| (x>127).if({0},{x.asInteger});}; //makes sure the numbers are comeout below 7 bits and as integers
 
 	/**
 	~mlis -the 8 channel mic listener
@@ -140,51 +146,51 @@ spath.do({|path,i|
 	MIDIClient.init;
 
 	MIDIdef.sysex(\parse,{|val,src|
-		var prep;
-	switch(val[1],
-		0,{
-			var l_sum,room_condition,firmware,signal,weight;
-				room_condition=TwoWayIdentityDictionary[\Normal->0,\Closed->1,\Open->2];
-				firmware=TwoWayIdentityDictionary['APP-MIC-RECORDER_DDR426797A2936B'->0,'VocalSorcery_1.0.4'->1];
-				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
+var prep,l_sum,room_condition,firmware,signal,weight,git;
+room_condition=TwoWayIdentityDictionary[\Normal->0,\Closed->1,\Open->2];
+firmware=TwoWayIdentityDictionary['APP-MIC-RECORDER_DDR426797A2936B'->0,'VocalSorcery_1.0.4'->1,'app_home_monitor'->2];
+weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
 
-			~out.add(\Version->format("%.%.%",val[2],val[3],val[4]));
 			~out.add(\ID->~d_id);
 			~out.add(\Firmware->firmware.getID(~firmwarz););
-			~out.add('Room Condition'->room_condition.getID(val[7]););
-			~out.add('Test Configuration'->~expand.value(val[5],val[6]););
+			~out.add('Room Condition'->room_condition.getID(val[46]););
+			~out.add('Test Configuration'->~expand.value(val[45],val[44]););
 
 
 			//location 1
-				~out.add(\s1l->Dictionary.with(*[\x->~expandq.value(val[13],val[12]),\y->~expandq.value(val[11],val[10]),\z->~expandq.value(val[9],val[8])]););
+				~out.add(\s1l->Dictionary.with(*[\x->~expandq.value(val[52],val[51]),\y->~expandq.value(val[50],val[49]),\z->~expandq.value(val[48],val[47])]););
 
-				if(~expand.value(val[15],val[14])==0,{~out.add(\s1p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[15],val[14])),'signal num'->~expand.value(val[15],val[14]),\level->0,\weight->weight.getID(val[18])]);); },{
-					~out.add(\s1p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[15],val[14])),'signal num'->~expand.value(val[15],val[14]),\level->~expandq.value(val[17],val[16]),\weight->weight.getID(val[18])]););});
+				if(~expand.value(val[54],val[53])==0,{~out.add(\s1p->Dictionary.with(*[\signal->~signal.getID(0),'signal num'->0,\level->0,\weight->weight.getID(2)]);); },{
+					~out.add(\s1p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[54],val[53])),'signal num'->~expand.value(val[54],val[53]),\level->~expandq.value(val[56],val[55]),\weight->weight.getID(val[57])]););});
 
 				~out.add(\s1r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s1l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s1l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s1l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s1l),~mic_positon),'cylinder Radius'->~cylinder_radius.value(~out.at(\s1l),~mic_positon)]););
 
 			//location 2
-			    ~out.add(\s2l->Dictionary.with(*[\x->~expandq.value(val[24],val[23]),\y->~expandq.value(val[22],val[21]),\z->~expandq.value(val[20],val[19])]););
+			    ~out.add(\s2l->Dictionary.with(*[\x->~expandq.value(val[63],val[62]),\y->~expandq.value(val[61],val[60]),\z->~expandq.value(val[59],val[58])]););
 
-				if(~expand.value(val[26],val[25])==0,{~out.add(\s2p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[26],val[25])),'signal num'->~expand.value(val[26],val[25]),\level->0.0,\weight->weight.getID(val[29])]););},
-					{~out.add(\s2p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[26],val[25])),'signal num'->~expand.value(val[26],val[25]),\level->~expandq.value(val[28],val[27]),\weight->weight.getID(val[29])]););});
-
+				if(~expand.value(val[65],val[64])==0,{~out.add(\s2p->Dictionary.with(*[\signal->~signal.getID(0),'signal num'->0,\level->0,\weight->weight.getID(2)]););},
+					{~out.add(\s2p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[65],val[64])),'signal num'->~expand.value(val[65],val[64]),\level->~expandq.value(val[67],val[66]),\weight->weight.getID(val[68])]););});
 
 				~out.add(\s2r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s2l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s2l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s2l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s2l),~mic_positon),'cylinder Radius'->~cylinder_radius.value(~out.at(\s2l),~mic_positon)]););
 
 			//location 3
-			    ~out.add(\s3l->Dictionary.with(*[\x->~expandq.value(val[35],val[34]),\y->~expandq.value(val[33],val[32]),\z->~expandq.value(val[31],val[30])]););
+			    ~out.add(\s3l->Dictionary.with(*[\x->~expandq.value(val[74],val[73]),\y->~expandq.value(val[72],val[71]),\z->~expandq.value(val[70],val[69])]););
 
-				if(~expand.value(val[37],val[36])==0,{~out.add(\s3p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[37],val[36])),'signal num'->~expand.value(val[37],val[36]),\level->0,\weight->weight.getID(val[40])]););},{~out.add(\s3p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[37],val[36])),'signal num'->~expand.value(val[37],val[36]),\level->~expandq.value(val[39],val[38]),\weight->weight.getID(val[40])]););});
+				if(~expand.value(val[76],val[75])==0,{~out.add(\s3p->Dictionary.with(*[\signal->~signal.getID(0),'signal num'->0,\level->0,\weight->weight.getID(2)]););},{~out.add(\s3p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[76],val[75])),'signal num'->~expand.value(val[76],val[75]),\level->~expandq.value(val[78],val[77]),\weight->weight.getID(val[79])]););});
 
 				~out.add(\s3r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s3l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s3l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s3l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s3l),~mic_positon),'cylinder Radius'->~cylinder_radius.value(~out.at(\s3l),~mic_positon)]););
 
 				//location 4
-			    ~out.add(\s4l->Dictionary.with(*[\x->~expandq.value(val[46],val[45]),\y->~expandq.value(val[44],val[43]),\z->~expandq.value(val[42],val[41])]););
+			    ~out.add(\s4l->Dictionary.with(*[\x->~expandq.value(val[85],val[84]),\y->~expandq.value(val[83],val[83]),\z->~expandq.value(val[81],val[80])]););
 
-				if(~expand.value(val[48],val[47])==0,{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[48],val[47])),'signal num'->~expand.value(val[48],val[47]),\level->0,\weight->weight.getID(val[51])]););},{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[48],val[47])),'signal num'->~expand.value(val[48],val[47]),\level->~expandq.value(val[50],val[49]),\weight->weight.getID(val[51])]););});
+				if(~expand.value(val[87],val[86])==0,{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(0),'signal num'->0,\level->0,\weight->weight.getID(2)]););},{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[87],val[86])),'signal num'->~expand.value(val[87],val[86]),\level->~expandq.value(val[89],val[88]),\weight->weight.getID(val[90])]););});
 
 				~out.add(\s4r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s4l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s4l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s4l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s4l),~mic_positon),'cylinder Radius'->~cylinder_radius.value(~out.at(\s4l),~mic_positon)]););
+
+		git="";
+		for(4,43,{|i| git=git++val[i].asAscii.as(String);});
+		~out.add(\sgit->git); //sender script git
+		~out.add(\bgit->gitcommit); //board git
 
 	//put nickname stuff here
 	~out.add(\nickname_1->'silence@xxxxxxxxxxx');
@@ -259,24 +265,40 @@ spath.do({|path,i|
 						pos_data.write(format("%,%,\n","MZ",~mic_positon.at(\z)));
 						pos_data.write(format("%,%,\n","ID",~out.at(\ID)));
 						pos_data.write(format("%,%,\n","Firmware",~out.at(\Firmware)));
+				        pos_data.write(format("%,%,\n","Sender_git",~out.at(\sgit)));
+				        pos_data.write(format("%,%,\n","Board_git",~out.at(\bgit)));
 
 						pos_data.close;
 					},
 		{"Positional_Data_machine.csv  file already exist".postln;}
 	);
 
-		}
-	);
-		switch(~out['Room Condition'],
+				switch(~out['Room Condition'],
 		\Normal,{
+				var code,weight;
+				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
+				code=(~out.at('Test Configuration').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s1p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s1p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s2p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s2p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s3p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s3p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s4p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s4p).at('signal num').asInteger.asHexString(width:4));
+
+				~tau_write=File(format("%%-%-r-%.csv",~panorm,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~panorm++"three_channels/";
 				~raw_path=~panorms++"raw/";
+
 			},
 		\Closed,{
+				var code,weight;
+				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
+				code=(~out.at('Test Configuration').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s1p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s1p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s2p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s2p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s3p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s3p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s4p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s4p).at('signal num').asInteger.asHexString(width:4));
+
+				~tau_write=File(format("%%-%-r-%.csv",~paclsd,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~paclsd++"three_channels/";
 				~raw_path=~paclsd++"raw/";
 			},
 		\Open,{
+				var code,weight;
+				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
+				code=(~out.at('Test Configuration').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s1p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s1p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s2p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s2p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s3p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s3p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s4p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s4p).at('signal num').asInteger.asHexString(width:4));
+
+				~tau_write=File(format("%%-%-r-%.csv",~papn,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~papn++"three_channels/";
 				~raw_path=~papn++"raw/";
 		});
@@ -299,7 +321,6 @@ prep=Routine({
 			~mcrpd=Synth(\mic_listen_crpd,[\in,~mic_input,\out,~crpd_bus],~passthrough);
 
 	});
-
 
 	MIDIdef.start(\recorder,{|src|
 		var player;
