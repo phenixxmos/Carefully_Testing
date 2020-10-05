@@ -19,7 +19,7 @@ var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware,gitcommit;
 ~mic_positon.add(\z->m_pos.at(\z));
 ~d_id=id;
 ~firmwarz=firmware;
-
+//just to make sure
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;
 ~nickn=TwoWayIdentityDictionary.new;
@@ -279,7 +279,6 @@ weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'-
 				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
 				code=(~out.at('Test Configuration').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s1p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s1p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s2p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s2p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s3p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s3p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s4p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s4p).at('signal num').asInteger.asHexString(width:4));
 
-				~tau_write=File(format("%%-%-r-%.csv",~panorm,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~panorm++"three_channels/";
 				~raw_path=~panorm++"raw/";
 
@@ -289,7 +288,6 @@ weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'-
 				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
 				code=(~out.at('Test Configuration').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s1p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s1p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s2p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s2p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s3p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s3p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s4p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s4p).at('signal num').asInteger.asHexString(width:4));
 
-				~tau_write=File(format("%%-%-r-%.csv",~paclsd,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~paclsd++"three_channels/";
 				~raw_path=~paclsd++"raw/";
 			},
@@ -298,7 +296,6 @@ weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'-
 				weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
 				code=(~out.at('Test Configuration').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s1p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s1p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s1p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s2p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s2p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s2p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s3p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s3p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s3p).at('signal num').asInteger.asHexString(width:4))++(~upperq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(~lowerq.value(~out.at(\s4p).at(\level)).asInteger.asHexString(width:2))++(weight.at(~out.at(\s4p).at(\weight)).asInteger.asHexString(width:2))++(~out.at(\s4p).at('signal num').asInteger.asHexString(width:4));
 
-				~tau_write=File(format("%%-%-r-%.csv",~papn,~out.at(\nickname_1),~out.at(\nickname_2),code),"w");
 				~crpd_path=~papn++"three_channels/";
 				~raw_path=~papn++"raw/";
 		});

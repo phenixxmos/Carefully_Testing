@@ -19,7 +19,7 @@ var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware,gitcommit;
 ~mic_positon.add(\z->m_pos.at(\z));
 ~d_id=id;
 ~firmwarz=firmware;
-
+//just to make sure
 spath=SortedList.new(size: 8);
 ~signal=TwoWayIdentityDictionary.new;
 ~nickn=TwoWayIdentityDictionary.new;
