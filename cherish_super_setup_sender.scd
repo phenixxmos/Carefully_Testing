@@ -1530,7 +1530,7 @@ gitcommit.ascii.do({|in,i|
 ~sys.put(60,~lowerq.value(speak2.at(\y)););
 ~sys.put(61,~upperq.value(speak2.at(\y)););
 ~sys.put(62,~lowerq.value(speak2.at(\x)););
-~sys.put(62,~upperq.value(speak2.at(\x)););
+~sys.put(63,~upperq.value(speak2.at(\x)););
 
 ~sys.put(69,~lowerq.value(speak3.at(\z)););
 ~sys.put(70,~upperq.value(speak3.at(\z)););
