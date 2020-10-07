@@ -5,8 +5,8 @@ m.numBuffers=2000;
 
 s.doWhenBooted({
 var path,spath,l,gitcommit,test_config,dev_id,speak1,speak2,speak3,speak4,room_c,sender,receiver;
-
-path=PathName.new(File.getcwd++"/Playback_regain/");
+path=PathName.new(File.getcwd++"/Quadrant/");
+//path=PathName.new(File.getcwd++"/Playback_regain/");
 //path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_regain/");
