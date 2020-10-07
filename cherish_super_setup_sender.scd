@@ -1518,6 +1518,7 @@ gitcommit.ascii.do({|in,i|
 ~sys.put(44,~lower.value(test_config);); //test config
 ~sys.put(45,~upper.value(test_config););//test config
 ~sys.put(46,~bounder.value(room_c););
+
 ~sys.put(47,~lowerq.value(speak1.at(\z)););
 ~sys.put(48,~upperq.value(speak1.at(\z)););
 ~sys.put(49,~lowerq.value(speak1.at(\y)););

@@ -182,7 +182,7 @@ weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'-
 				~out.add(\s3r->Dictionary.with(*[\elevation->~elevation.value(~out.at(\s3l),~mic_positon),'spherical Radius'->~sphere_radius.value(~out.at(\s3l),~mic_positon),'azimuth angle'->~azimuth_φ.value(~out.at(\s3l),~mic_positon),'elavation angle'->~elevation_θ.value(~out.at(\s3l),~mic_positon),'cylinder Radius'->~cylinder_radius.value(~out.at(\s3l),~mic_positon)]););
 
 				//location 4
-			    ~out.add(\s4l->Dictionary.with(*[\x->~expandq.value(val[85],val[84]),\y->~expandq.value(val[83],val[83]),\z->~expandq.value(val[81],val[80])]););
+			    ~out.add(\s4l->Dictionary.with(*[\x->~expandq.value(val[85],val[84]),\y->~expandq.value(val[83],val[82]),\z->~expandq.value(val[81],val[80])]););
 
 				if(~expand.value(val[87],val[86])==0,{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(0),'signal num'->0,\level->0,\weight->weight.getID(2)]););},{~out.add(\s4p->Dictionary.with(*[\signal->~signal.getID(~expand.value(val[87],val[86])),'signal num'->~expand.value(val[87],val[86]),\level->~expandq.value(val[89],val[88]),\weight->weight.getID(val[90])]););});
 

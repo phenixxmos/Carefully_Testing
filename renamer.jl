@@ -1,9 +1,9 @@
 
 using ReadWriteDlm2
-path="/Users/phenix/Documents/Cherish/Location_Recordings/localization_wave_2_lo_norm/"
+path="/Users/phenix/Documents/Cherish/Location_Recordings/Localized_data/closed_wave1_hi/"
 #Open
-shift=3
-#shift=0
+#shift=3
+shift=0
 cd(path*"Open/raw")
 for (root, dirs, files) in walkdir(path*"Open/raw")
     mkdir("renamed")
