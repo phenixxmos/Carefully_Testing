@@ -1405,7 +1405,7 @@ g.latency=0;
 
 	voice=Pmono(\playbuf_m,
 		\out,0,
-		\cal,0.1,
+		\cal,0.05,
 	\bufnum,~samp.at(3),
 		\amp,Pseq([1,0,1,0,1,0,1,0],1),
 		\dur,15,);
@@ -1413,7 +1413,7 @@ g.latency=0;
 	//TV
 	tv=Pmono(\playbuf_m,
 		\out,1,
-		\cal,0.1,
+		\cal,0.05,
 	\bufnum,~samp.at(2),
 		\amp,Pseq([0,1],1),
 		\dur,60,);
@@ -1421,7 +1421,7 @@ g.latency=0;
 	//AC
 	ac=Pmono(\playbuf_m,
 	\out,2,
-	\cal,0.1,
+	\cal,0.05,
 	\bufnum,~samp.at(0),
 	\amp,Pseq([0,1,0],1),
 	\dur,Pseq([30,60,30],1),);
@@ -1429,7 +1429,7 @@ g.latency=0;
 	//kitchen
 	kitchen=Pmono(\playbuf_m,
 	\out,3,
-	\cal,0.1,
+	\cal,0.05,
 	\bufnum,~samp.at(1),
 	\amp,Pseq([0,1,0,0,1,0,0,0],1),
 	\dur,15,);
