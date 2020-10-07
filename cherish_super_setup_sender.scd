@@ -10,10 +10,10 @@ path=PathName.new(File.getcwd++"/Quadrant/");
 //path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_regain/");
+//path=PathName.new("/Users/phenix/Downloads/0.1.x/Quadrant/");
 
 # gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
 //#gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
-
 
 
 ~gap_size=0.05;
@@ -32,7 +32,7 @@ spath.do({|path,i|
 MIDIClient.init;
 g=MIDIOut.new(0);
 g.latency=0;
-
+/*
 ~directional_playback=Routine({
 	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
 
@@ -1397,7 +1397,9 @@ g.latency=0;
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
 	5.wait;
 	});
-
+	*/
+/*	~samp.at(2);
+	~signal.getID(2);*/
 	~quad=Routine({
 	var synth,second,nframe,rate,buffer_num,sys_out,playlist,voice,tv,ac,kitchen;
 
@@ -1434,10 +1436,10 @@ g.latency=0;
 
 	sys_out=~sys;
 		//playlist=[s1,s2,s3,s4]
-		playlist=[Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('025_Bathtub Drain'),\level->80,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')]),
-			Dictionary.with(*[\sig->~signal.at('silence'),\level->80,\weight->~weight.at('dBeq(A)')])];
+		playlist=[Dictionary.with(*[\sig->~signal.at('session_Person 3 (male)_03'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Radio Sounds'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Air_Conditioner'),\level->80,\weight->~weight.at('dBeq(A)')]),
+			Dictionary.with(*[\sig->~signal.at('Kitchen Sounds'),\level->80,\weight->~weight.at('dBeq(A)')])];
 
 	sys_out.put(53,~lower.value(playlist.at(0).at(\sig)););
 	sys_out.put(54,~upper.value(playlist.at(0).at(\sig)););
@@ -1463,10 +1465,10 @@ g.latency=0;
 	g.sysex(sys_out);
 	2.wait;
 	g.start;
-
-	(35+~gap_size).wait;
-	g.stop;
 	Ppar([voice,tv,ac,kitchen]).play;
+	(120+~gap_size).wait;
+	g.stop;
+
 	5.wait;
 	});
 
@@ -1564,7 +1566,7 @@ s.boot;
 
 ~test_player=~bath_drain_1++~bath_drain_2++~bath_drain_3++~bath_drain_4++~bath_fill_1++~bath_fill_2++~bath_fill_3++~bath_fill_4++~microwave_1++~microwave_2++~microwave_3++~microwave_4++~door_slam_1++~door_slam_2++~door_slam_3++~door_slam_4++~voice_1++~voice_2++~voice_3++~voice_4++~noise_1++~noise_2++~noise_3++~noise_4++~fin;
 
-~bath_drain_1.play;
+
 
 
 //
@@ -1591,3 +1593,7 @@ var noise_calibration;noise_calibration=(-9.2);
 this is an excellent sysex guide
 https://www.recordingblogs.com/wiki/midi-system-exclusive-message
 **/
+
+~quad.play;
+
+
