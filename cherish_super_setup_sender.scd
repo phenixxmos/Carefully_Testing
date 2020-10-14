@@ -5,15 +5,15 @@ m.numBuffers=2000;
 
 s.doWhenBooted({
 var path,spath,l,gitcommit,test_config,dev_id,speak1,speak2,speak3,speak4,room_c,sender,receiver;
-path=PathName.new(File.getcwd++"/Quadrant/");
-//path=PathName.new(File.getcwd++"/Playback_regain/");
+//path=PathName.new(File.getcwd++"/Quadrant/");
+path=PathName.new(File.getcwd++"/Playback_regain/");
 //path=PathName.new("/Users/phenix/Documents/Cherish/Cherish_testing_0.0.0/calibration_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_samples/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_regain/");
 //path=PathName.new("/Users/phenix/Downloads/0.1.x/Quadrant/");
 
-# gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
-//#gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
+//# gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile(File.getcwd++"/sender_config.scd").value();
+#gitcommit,speak1,speak2,speak3,speak4,test_config,room_c=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/sender_config.scd").value();
 
 
 ~gap_size=0.05;
@@ -32,7 +32,7 @@ spath.do({|path,i|
 MIDIClient.init;
 g=MIDIOut.new(0);
 g.latency=0;
-/*
+
 ~directional_playback=Routine({
 	var synth,second,nframe,rate,buffer_num,sys_out,playlist;
 
@@ -1397,9 +1397,18 @@ g.latency=0;
 	if(playlist.at(3).at(\sig)>0,{synth.at(3).free;},{});
 	5.wait;
 	});
-	*/
+
 /*	~samp.at(2);
 	~signal.getID(2);*/
+/**
+	~kitchen=Pmono(\playbuf_m,
+	\out,0,
+	\cal,0.025,
+	\bufnum,~samp.at(1),
+	\amp,Pseq([0,1,0,0,1,0,0,0],1),
+	\dur,15,);
+
+
 	~quad=Routine({
 	var synth,second,nframe,rate,buffer_num,sys_out,playlist,voice,tv,ac,kitchen;
 
@@ -1472,7 +1481,7 @@ g.latency=0;
 	5.wait;
 	});
 
-
+**/
 ~fin=Routine({1.wait;"The Recordings are done".postln;});
 
 ~weight=TwoWayIdentityDictionary['dBeq(A)'->0,'dBeq(C)'->1,'dBeq(Z)'->2,'dBf(A)'->3,'dBf(C)'->4,'dBeq(Z)'->5,'dBs(A)'->6,'dBs(C)'->7,'dBs(Z)'->8];
@@ -1567,7 +1576,7 @@ s.boot;
 ~test_player=~bath_drain_1++~bath_drain_2++~bath_drain_3++~bath_drain_4++~bath_fill_1++~bath_fill_2++~bath_fill_3++~bath_fill_4++~microwave_1++~microwave_2++~microwave_3++~microwave_4++~door_slam_1++~door_slam_2++~door_slam_3++~door_slam_4++~voice_1++~voice_2++~voice_3++~voice_4++~noise_1++~noise_2++~noise_3++~noise_4++~fin;
 
 
-
+~kitchen.play;
 
 //
 //

@@ -30,6 +30,8 @@ spath.do({|path,i|
 		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
 });
 ~signal.put(\silence,0);
+~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
+
 ~nickn.put('tub_fill@xxxxxxxxxx',~signal.at('024_Bathtub Fill'));
 ~nickn.put('tub_drain@xxxxxxxxx',~signal.at('025_Bathtub Drain'));
 ~nickn.put('door_slam@xxxxxxxxx',~signal.at('07_Door Open and Slam'));

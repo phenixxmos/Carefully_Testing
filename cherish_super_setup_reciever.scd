@@ -5,8 +5,8 @@ m.numBuffers=2000;
 
 s.doWhenBooted({
 var path,spath,l,rec_path,sender,receiver,gap,m_in,m_pos,id,firmware,gitcommit;
-	path=PathName.new(File.getcwd++"/Quadrant/");
-	//path=PathName.new(File.getcwd++"/Playback_regain/");
+	//path=PathName.new(File.getcwd++"/Quadrant/");
+	path=PathName.new(File.getcwd++"/Playback_regain/");
 	//path=PathName.new("/Users/phenix/Downloads/0.1.x/Playback_regain/");
 	# rec_path,gap,m_in,m_pos,id,firmware,gitcommit=this.compileFile(File.getcwd++"/reciever_config.scd").value();
 	//# rec_path,gap,m_in,m_pos,id,firmware,gitcommit=this.compileFile("/Users/phenix/Documents/Cherish/Scripts/Carefully_Testing/reciever_config.scd").value();
@@ -31,8 +31,8 @@ spath.do({|path,i|
 		~signal.put(PathName.new(path).fileNameWithoutExtension.asSymbol,(i+1));
 });
 ~signal.put(\silence,0);
+~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
 
-/*
 ~nickn.put('tub_fill@xxxxxxxxxx',~signal.at('024_Bathtub Fill'));
 ~nickn.put('tub_drain@xxxxxxxxx',~signal.at('025_Bathtub Drain'));
 ~nickn.put('door_slam@xxxxxxxxx',~signal.at('07_Door Open and Slam'));
@@ -40,13 +40,13 @@ spath.do({|path,i|
 ~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
 ~nickn.put('white_noise@xxxxxxx',~signal.at('White_Noise'));
 ~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('Person_3_48kHz_chopped'));
-*/
 
-~nickn.put('silence@xxxxxxxxxxx',~signal.at('silence'));
-~nickn.put('AC@xxxxxxxxxxxxxxxx',~signal.at('Air_Conditioner'));
+
+
+/*~nickn.put('AC@xxxxxxxxxxxxxxxx',~signal.at('Air_Conditioner'));
 ~nickn.put('TV@xxxxxxxxxxxxxxxx',~signal.at('Radio Sounds'));
 ~nickn.put('voice@xxxxxxxxxxxxx',~signal.at('session_Person 3 (male)_03'));
-~nickn.put('kitchen@xxxxxxxxxxx',~signal.at('Kitchen Sounds'));
+~nickn.put('kitchen@xxxxxxxxxxx',~signal.at('Kitchen Sounds'));*/
 
 
 ~playback_list=File(format("%Playback_list.csv",rec_path),"w");
