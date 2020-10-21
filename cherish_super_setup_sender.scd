@@ -1561,7 +1561,7 @@ gitcommit.ascii.do({|in,i|
 
 	//connects midi output
 	    sender="128:4";
-	    receiver="20:0";
+	    receiver="24:0";
 	    l=Pipe.new(format("aconnect % %",sender,receiver),"r");
         l.getLine;
 

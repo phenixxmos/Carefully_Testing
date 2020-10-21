@@ -384,7 +384,7 @@ prep=Routine({
 		"this the reset".postln;
 	});
 
-	sender="24:0";
+	sender="20:0";
 	receiver="128:0";
 	l=Pipe.new(format("aconnect % %",sender,receiver),"r");
 	l.getLine;

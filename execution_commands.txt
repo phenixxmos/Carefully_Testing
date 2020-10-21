@@ -14,12 +14,12 @@ execute file path
 
 
 (var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_reciever.scd");)
-(var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_sender.scd");)
+
 (var z;z=this.executeFile(File.getcwd++"/cherish_super_setup_reciever_no_logging.scd");)
 
 ~noi_cal=[0.125,0.125,0.125,0.125];
 ~directional_playback_all.play;
-
+~noi_cal=[0.1,0.1,0.1,0.1];
 
 (var noise_calibration;noise_calibration=(-9.2);~noi_cal=noise_calibration.dbamp;)
 
@@ -31,6 +31,7 @@ Compare a recording versus a live event!
 
 jack_lsp
 aconnect -l
+cat /proc/asound/cards
 
 How to git
 git status
